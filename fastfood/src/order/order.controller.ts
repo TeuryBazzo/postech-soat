@@ -1,10 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { OrderService } from './order.service';
 import { Order } from './order.entity';
 
 @Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+export class OrderController {
+  constructor(private readonly appService: OrderService) {}
 
   @Get()
   getHello(): Promise<Order[]> {

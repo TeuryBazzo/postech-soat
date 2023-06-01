@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { OrderController } from './order.controller';
+import { OrderService } from './order.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Order } from './order.entity';
@@ -18,9 +18,9 @@ import { Order } from './order.entity';
     }),
     TypeOrmModule.forFeature([Order])
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [OrderController],
+  providers: [OrderService],
 })
-export class AppModule { 
+export class OrderModule { 
   constructor(private dataSource: DataSource) {}  
 }
