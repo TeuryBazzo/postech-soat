@@ -2,7 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
+import { DataSource } from 'typeorm';
+import { Order } from './order.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -12,11 +13,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'soatuser',
       password: 'soatpassword',
       database: 'soatdb',
-      entities: [],
+      entities: [Order],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([Order])
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private dataSource: DataSource) {}  
+}
