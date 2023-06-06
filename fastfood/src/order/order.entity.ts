@@ -1,23 +1,19 @@
+import { Cart } from 'src/cart/cart.entity';
 import { Client } from 'src/client/client.entity';
 import { Product } from 'src/product/product.entity';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity()
 export class Order {
+
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  number: string;
-
-  // @Column()
-  // client: Client;
-
-  // @Column()
-  // products: Array<Product>;
-
-  @Column()
-  totalPrice: number;
+  @OneToOne(() => Cart, {
+    cascade: true
+  })
+  @JoinColumn()
+  cart: Cart;
 
   @Column()
   dateTime: string;
@@ -25,6 +21,10 @@ export class Order {
   @Column()
   status: string;
 
-  @Column()
-  obs: string;
+  @Column({
+    nullable: true
+  })
+  observation: string;
+
+  totalPrice: number;
 }
