@@ -9,11 +9,14 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => Cart, {
-    cascade: true
-  })
+  @OneToOne(() => Cart, { cascade: true })
   @JoinColumn()
   cart: Cart;
+
+  @ManyToOne(() => Client, (client) => client.orders, {
+    cascade: true
+  })
+  client: Client;
 
   @Column()
   dateTime: string;
