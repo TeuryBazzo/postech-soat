@@ -23,8 +23,8 @@ import { ClientService } from 'src/client/client.service';
     }),
     TypeOrmModule.forFeature([Order, Client])
   ],
-  controllers: [OrderController, ClientController],
-  providers: [OrderService, ClientService],
+  controllers: [OrderController],
+  providers: [OrderService],
 })
 export class OrderModule {
   constructor(private dataSource: DataSource) { }
