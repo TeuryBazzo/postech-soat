@@ -4,6 +4,8 @@ import { OrderService } from './order.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Order } from './order.entity';
+import { Cart, ItemCart } from 'src/cart/cart.entity';
+import { Product } from 'src/product/product.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -13,7 +15,7 @@ import { Order } from './order.entity';
       username: 'soatuser',
       password: 'soatpassword',
       database: 'soatdb',
-      entities: [Order],
+      entities: [Order, Cart, ItemCart, Product],
       synchronize: true,
     }),
     TypeOrmModule.forFeature([Order])
@@ -21,6 +23,6 @@ import { Order } from './order.entity';
   controllers: [OrderController],
   providers: [OrderService],
 })
-export class OrderModule { 
-  constructor(private dataSource: DataSource) {}  
+export class OrderModule {
+  constructor(private dataSource: DataSource) { }
 }

@@ -1,13 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { Order } from './order.entity';
 
-@Controller()
+@Controller("api/v1/orders")
 export class OrderController {
-  constructor(private readonly appService: OrderService) {}
+  constructor(private readonly appService: OrderService) { }
 
   @Get()
-  getHello(): Promise<Order[]> {
-    return this.appService.getHello();
+  getAll(): Promise<Order[]> {
+    return this.appService.getAll();
+  }
+
+  @Post()
+  post(@Body() order: Order): Promise<Order> {
+    console.log(order);
+    return this.appService.save(order);
   }
 }
