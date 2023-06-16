@@ -7,8 +7,6 @@ import { Order } from './order.entity';
 import { Cart, ItemCart } from 'src/cart/cart.entity';
 import { Product } from 'src/product/product.entity';
 import { Client } from 'src/client/client.entity';
-import { ClientController } from 'src/client/client.controller';
-import { ClientService } from 'src/client/client.service';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
