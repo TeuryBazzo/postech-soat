@@ -14,7 +14,13 @@ export class ProductService {
     return this.productRepository.find();
   }
 
-  save(product: Product): Promise<Product> {
+  create(product: Product): Promise<Product> {
+    return this.productRepository.save(product);
+  }
+
+  update(id: string, product: Product): Promise<Product> {
+    product.id = +id
+    console.log(product)
     return this.productRepository.save(product);
   }
 }

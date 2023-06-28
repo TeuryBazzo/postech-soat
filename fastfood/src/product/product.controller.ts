@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { ProductService } from "./product.service";
 import { Product } from "./product.entity";
 
@@ -12,8 +12,12 @@ export class ProductController {
   }
 
   @Post()
-  post(@Body() product: Product): Promise<Product> {
-    console.log(product);
-    return this.appService.save(product);
+  create(@Body() product: Product): Promise<Product> {
+    return this.appService.create(product);
+  }
+
+  @Put('/:id')
+  update(@Param('id') id: string, @Body() product: Product): Promise<Product> {
+    return this.appService.update(id, product)
   }
 }
