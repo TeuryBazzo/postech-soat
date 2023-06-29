@@ -1,8 +1,9 @@
-import { ConflictException, Injectable } from "@nestjs/common";
+import { ConflictException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Product } from "./product.entity";
 import { Not, Repository } from "typeorm";
 import { CreateProductDTO } from "./dto/createproduct.dto";
+import { UpdateProductDTO } from "./dto/updateproduct.dto";
 
 @Injectable()
 export class ProductService {
@@ -21,25 +22,34 @@ export class ProductService {
     product.category = createProductDto.category
     product.description = createProductDto.description
     product.price = createProductDto.price
-
     const storedProduct = await this.productRepository.findOneBy({code: product.code})
-  
     if (storedProduct) {
       throw new ConflictException()
     }
     return this.productRepository.save(product)
   }
 
-  async update(id: string, product: Product): Promise<Product> {
+  async update(id: string, updateProductDto: UpdateProductDTO): Promise<Product> {
+    let product = new Product()
     product.id = +id
-    const otherProduct = await this.productRepository.findOne({
+    product.code = updateProductDto.code
+    product.category = updateProductDto.category
+    product.price = updateProductDto.price
+    product.description = updateProductDto.description
+    const otherStoredProduct = await this.productRepository.findOne({
       where: {
         code: product.code,
         id: Not(product.id)
       }
     });
-    if (otherProduct) {
-      throw new ConflictException()
+    if (otherStoredProduct) {
+      throw new ConflictException() 
+    }
+    const storedProduct = await this.productRepository.findOneBy({
+      id: product.id
+    })
+    if (!storedProduct) {
+      throw new NotFoundException()
     }
     return this.productRepository.save(product);
   }
@@ -48,6 +58,9 @@ export class ProductService {
     const storedProduct = await this.productRepository.findBy({
       id: +id,
     })
+    if (storedProduct.length == 0) {
+      throw new NotFoundException()
+    } 
     return this.productRepository.remove(storedProduct)
   }
 }
