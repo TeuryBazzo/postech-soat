@@ -14,7 +14,7 @@ export class ProductService {
   getAll(): Promise<Product[]> {
     return this.productRepository.find();
   }
-  
+
   async create(createProductDto: CreateProductDTO): Promise<Product> {
     let product = new Product()
     product.code = createProductDto.code
