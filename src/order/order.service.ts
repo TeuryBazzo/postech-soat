@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Order } from './order.entity';
+import { Order, StatusOrder } from './order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -10,14 +10,15 @@ export class OrderService {
     private ordersRepository: Repository<Order>,
   ) { }
 
-  getAll(): Promise<Order[]> {
-    return this.ordersRepository.find();
+  getAll(status: string): Promise<Order[]> {
+    if (!status) {
+      return this.ordersRepository.find();
+    }
+    return this.ordersRepository.findBy({status: +status});
   }
 
   save(order: Order): Promise<Order> {
-
-    order.dateTime = new Date().toDateString();
-
+    order.dateTime = Date.now().toString()
     return this.ordersRepository.save(order);
   }
 }

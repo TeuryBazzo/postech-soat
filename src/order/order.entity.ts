@@ -3,10 +3,10 @@ import { Client } from 'src/client/client.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
 export enum StatusOrder {
-  RECEBIDO = "Recebido",
-  EM_PREPARACAO = "Em Preparacao",
-  PRONTO = "Pronto",
-  FINALIZADO = "Finalizado",
+  RECEBIDO = 1,
+  EM_PREPARACAO = 2,
+  PRONTO = 3,
+  FINALIZADO = 4,
 }
 
 @Entity()
@@ -24,7 +24,7 @@ export class Order {
   })
   client: Client;
 
-  @Column()
+  @Column({type: 'bigint'})
   dateTime: string;
 
   @Column({
