@@ -23,4 +23,12 @@ export class ProductService {
     console.log(product)
     return this.productRepository.save(product);
   }
+
+  
+  async delete(id: string, product: Product): Promise<Product[]> {
+    const storedProduct = await this.productRepository.findBy({
+      id: +id,
+    })
+    return this.productRepository.remove(storedProduct)
+  }
 }
