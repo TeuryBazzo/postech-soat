@@ -1,5 +1,7 @@
 export class SuccessResponseDTO {
-    message: string
-    status: number
-    data: any
+    constructor(
+        readonly status: number,
+        readonly message: string,
+        readonly data: any 
+    ) {}
 }

@@ -11,10 +11,7 @@ export class ProductController {
   @Get()
   async getAll(): Promise<SuccessResponseDTO> {
     let products = await this.appService.getAll()
-    let response = new SuccessResponseDTO()
-    response.status = 200
-    response.message = ''
-    response.data = products
+    let response = new SuccessResponseDTO(200, '', products)
     return response
   }
 
@@ -22,10 +19,7 @@ export class ProductController {
   async create(@Body() createProductDto: CreateProductDTO): Promise<SuccessResponseDTO> {
     try {
       let product = await this.appService.create(createProductDto)
-      let response = new SuccessResponseDTO()
-      response.status = 201 
-      response.message = "product was created successfully"
-      response.data = product
+      let response = new SuccessResponseDTO(201, 'product was created successfully', product)
       return response
     } catch (error) {
       throw error instanceof HttpException
@@ -38,10 +32,7 @@ export class ProductController {
   async update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDTO): Promise<SuccessResponseDTO> {
     try {
       let product =  await this.appService.update(id, updateProductDto)
-      let response = new SuccessResponseDTO()
-      response.status = 201 
-      response.message = "product was updated successfully"
-      response.data = product
+      let response = new SuccessResponseDTO(200, 'product was updated successfully', product)
       return response
     } catch (error) {
       throw error instanceof HttpException
@@ -54,10 +45,7 @@ export class ProductController {
   async delete(@Param('id') id: string, @Body() product: Product): Promise<SuccessResponseDTO> {
     try {
       await this.appService.delete(id, product)
-      let response = new SuccessResponseDTO()
-      response.status = 200 
-      response.message = "product was deleted successfully"
-      response.data = null;
+      let response = new SuccessResponseDTO(200, 'product was deleted successfully', null)
       return response
     } catch (error) {
       throw error instanceof HttpException
