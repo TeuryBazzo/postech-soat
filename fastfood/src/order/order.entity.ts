@@ -2,6 +2,13 @@ import { Cart } from 'src/cart/cart.entity';
 import { Client } from 'src/client/client.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
+export enum StatusOrder {
+  RECEBIDO = "Recebido",
+  EM_PREPARACAO = "Em Preparacao",
+  PRONTO = "Pronto",
+  FINALIZADO = "Finalizado",
+}
+
 @Entity()
 export class Order {
 
@@ -20,8 +27,12 @@ export class Order {
   @Column()
   dateTime: string;
 
-  @Column()
-  status: string;
+  @Column({
+    type: "enum",
+    enum: StatusOrder,
+    default: StatusOrder.RECEBIDO,
+})
+  status: StatusOrder;
 
   @Column({
     nullable: true
