@@ -1,4 +1,4 @@
-export class SuccessResponseDTO {
+export class ResponseDTO {
     constructor(
         readonly status: number,
         readonly message: string,

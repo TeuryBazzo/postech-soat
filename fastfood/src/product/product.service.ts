@@ -36,6 +36,12 @@ export class ProductService {
     product.category = updateProductDto.category
     product.price = updateProductDto.price
     product.description = updateProductDto.description
+    const storedProduct = await this.productRepository.findOneBy({
+      id: product.id
+    })
+    if (!storedProduct) {
+      throw new NotFoundException()
+    }
     const otherStoredProduct = await this.productRepository.findOne({
       where: {
         code: product.code,
@@ -44,12 +50,6 @@ export class ProductService {
     });
     if (otherStoredProduct) {
       throw new ConflictException() 
-    }
-    const storedProduct = await this.productRepository.findOneBy({
-      id: product.id
-    })
-    if (!storedProduct) {
-      throw new NotFoundException()
     }
     return this.productRepository.save(product);
   }
