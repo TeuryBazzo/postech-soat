@@ -1,7 +1,7 @@
 import { ConflictException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Product } from "./product.entity";
-import { Repository } from "typeorm";
+import { Not, Repository } from "typeorm";
 import { CreateProductDTO } from "./dto/createproduct.dto";
 
 @Injectable()
@@ -30,9 +30,17 @@ export class ProductService {
     return this.productRepository.save(product)
   }
 
-  update(id: string, product: Product): Promise<Product> {
+  async update(id: string, product: Product): Promise<Product> {
     product.id = +id
-    console.log(product)
+    const otherProduct = await this.productRepository.findOne({
+      where: {
+        code: product.code,
+        id: Not(product.id)
+      }
+    });
+    if (otherProduct) {
+      throw new ConflictException()
+    }
     return this.productRepository.save(product);
   }
 
