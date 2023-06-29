@@ -13,16 +13,6 @@ import { IsUniqueCpf } from 'src/client/validations/isUniqueCpf.validation';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'soatuser',
-      password: 'soatpassword',
-      database: 'soatdb',
-      entities: [Order, Cart, ItemCart, Product, Client],
-      synchronize: true,
-    }),
     TypeOrmModule.forFeature([Order, Client])
   ],
   controllers: [OrderController, ClientController],

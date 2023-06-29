@@ -4,19 +4,10 @@ import { Product } from "./product.entity";
 import { ProductController } from "./product.controller";
 import { DataSource } from "typeorm";
 import { ProductService } from "./product.service";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
-    imports: [
-        TypeOrmModule.forRoot({
-        type: 'mysql',
-        host: 'localhost',
-        port: 3306,
-        username: 'soatuser',
-        password: 'soatpassword',
-        database: 'soatdb',
-        entities: [Product],
-        synchronize: true,
-        }),
+    imports: [        
         TypeOrmModule.forFeature([Product])
     ],
     controllers: [ProductController],
