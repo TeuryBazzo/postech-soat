@@ -17,11 +17,7 @@ export class ProductService {
   }
 
   async create(createProductDto: CreateProductDTO): Promise<Product> {
-    let product = new Product()
-    product.code = createProductDto.code
-    product.category = createProductDto.category
-    product.description = createProductDto.description
-    product.price = createProductDto.price
+    let product = Product.newProductByCreate(createProductDto)
     const storedProduct = await this.productRepository.findOneBy({code: product.code})
     if (storedProduct) {
       throw new ConflictException()
@@ -30,12 +26,7 @@ export class ProductService {
   }
 
   async update(id: string, updateProductDto: UpdateProductDTO): Promise<Product> {
-    let product = new Product()
-    product.id = +id
-    product.code = updateProductDto.code
-    product.category = updateProductDto.category
-    product.price = updateProductDto.price
-    product.description = updateProductDto.description
+    let product = Product.newProductByUpdate(id, updateProductDto)
     const storedProduct = await this.productRepository.findOneBy({
       id: product.id
     })
