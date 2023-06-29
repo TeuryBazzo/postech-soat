@@ -10,6 +10,8 @@ import { Client } from 'src/client/client.entity';
 import { ClientController } from 'src/client/client.controller';
 import { ClientService } from 'src/client/client.service';
 import { IsUniqueCpf } from 'src/client/validations/isUniqueCpf.validation';
+import { ProductController } from 'src/product/product.controller';
+import { ProductService } from 'src/product/product.service';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -22,10 +24,10 @@ import { IsUniqueCpf } from 'src/client/validations/isUniqueCpf.validation';
       entities: [Order, Cart, ItemCart, Product, Client],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Order, Client])
+    TypeOrmModule.forFeature([Order, Client, Product])
   ],
-  controllers: [OrderController, ClientController],
-  providers: [OrderService, ClientService, IsUniqueCpf],
+  controllers: [OrderController, ClientController, ProductController],
+  providers: [OrderService, ClientService, ProductService, IsUniqueCpf],
 })
 export class OrderModule {
   constructor(private dataSource: DataSource) { }
