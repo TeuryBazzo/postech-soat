@@ -12,8 +12,11 @@ export class ProductService {
     private productRepository: Repository<Product>,
   ) { }
 
-  getAll(): Promise<Product[]> {
-    return this.productRepository.find();
+  getAll(category: string): Promise<Product[]> {
+    if (!category) {
+      return this.productRepository.find();
+    }
+    return this.productRepository.findBy({category: category});
   }
 
   async create(createProductDto: CreateProductDTO): Promise<Product> {
