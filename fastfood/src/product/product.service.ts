@@ -1,7 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Product } from "./product.entity";
 import { Repository } from "typeorm";
+import { CreateProductDTO } from "./dto/createproduct.dto";
 
 @Injectable()
 export class ProductService {
@@ -13,9 +14,20 @@ export class ProductService {
   getAll(): Promise<Product[]> {
     return this.productRepository.find();
   }
+  
+  async create(createProductDto: CreateProductDTO): Promise<Product> {
+    let product = new Product()
+    product.code = createProductDto.code
+    product.category = createProductDto.category
+    product.description = createProductDto.description
+    product.price = createProductDto.price
 
-  create(product: Product): Promise<Product> {
-    return this.productRepository.save(product);
+    const storedProduct = await this.productRepository.findOneBy({code: product.code})
+  
+    if (storedProduct) {
+      throw new ConflictException()
+    }
+    return this.productRepository.save(product)
   }
 
   update(id: string, product: Product): Promise<Product> {
