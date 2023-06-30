@@ -14,7 +14,7 @@ export class OrderService {
     if (!status) {
       return this.ordersRepository.find();
     }
-    return this.ordersRepository.findBy({status: +status});
+    return this.ordersRepository.find({where:{status: +status}, order:{dateTime: "ASC"}});
   }
 
   save(order: Order): Promise<Order> {
