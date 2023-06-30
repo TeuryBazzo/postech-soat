@@ -2,6 +2,4 @@
 
 Pós Tech - SOAT1
 
-Miro : https://miro.com/app/board/uXjVMK9tIRA=/
-
-Notion : https://www.notion.so/alicefrancener/P-s-tech-Wiki-do-Projeto-dc69c63e90ac42cd935120bbb58555d8?pvs=4
+Notion : https://www.notion.so/0d54e29fb7ce4a7d9111c8378c8f9e2e?v=646535e51d35443881df3e5d84db68f7
