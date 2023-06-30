@@ -30,7 +30,7 @@ export class Order {
   @Column({
     type: "enum",
     enum: StatusOrder,
-    default: StatusOrder.RECEBIDO,
+    default: StatusOrder.RECEBIDO
 })
   status: StatusOrder;
 

@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, IsNumber, IsNumberString, Matches, MaxLength, MinLength, Validate } from "class-validator";
-import { IsUniqueCpf } from "../validations/isUniqueCpf.validation";
+import { IsUniqueCpf } from "../validations/isuniquecpf.validation";
 
-export class CreateClientDto {
+export class CreateClientDTO {
     @IsEmail()
     email: string;
   

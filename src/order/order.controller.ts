@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { Order } from './order.entity';
+import { CreateOrderDTO } from './dto/createorder.dto';
 
 @Controller("api/v1/orders")
 export class OrderController {
@@ -12,8 +13,9 @@ export class OrderController {
   }
 
   @Post()
-  post(@Body() order: Order): Promise<Order> {
+  post(@Body() order: CreateOrderDTO): Promise<Order> {
     console.log(order);
+    
     return this.appService.save(order);
   }
 }
