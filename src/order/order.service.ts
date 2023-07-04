@@ -6,6 +6,8 @@ import { Repository } from 'typeorm';
 import { CreateOrderDTO } from './dto/createorder.dto';
 import { Product } from 'src/product/product.entity';
 import { Client } from 'src/client/client.entity';
+import { ConflictException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class OrderService {
@@ -23,6 +25,18 @@ export class OrderService {
       return this.ordersRepository.find();
     }
     return this.ordersRepository.find({ where: { status: +status }, order: { dateTime: "ASC" } });
+  }
+
+  async fakeCheckout(orderId: number){
+    var storedOrder = await this.ordersRepository.findOneBy({ id: orderId})
+    
+    if (!storedOrder) 
+      throw new NotFoundException();
+    
+    storedOrder.status = StatusOrder.FINALIZADO;
+    await this.ordersRepository.save(storedOrder);
+
+    return storedOrder;
   }
 
   async save(orderDto: CreateOrderDTO): Promise<Order> {
