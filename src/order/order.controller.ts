@@ -13,9 +13,9 @@ export class OrderController {
   }
 
   @Post()
-  post(@Body() order: CreateOrderDTO): Promise<Order> {
-    console.log(order);
+  post(@Body() orderDto: CreateOrderDTO): Promise<Order> {
+    console.log(orderDto);
     
-    return this.appService.save(order);
+    return this.appService.save(orderDto);
   }
 }

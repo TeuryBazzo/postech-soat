@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateOrderDTO } from './dto/createorder.dto';
 import { Product } from 'src/product/product.entity';
+import { Client } from 'src/client/client.entity';
 
 @Injectable()
 export class OrderService {
@@ -13,26 +14,18 @@ export class OrderService {
     private ordersRepository: Repository<Order>,
     @InjectRepository(Product)
     private productRepository: Repository<Product>,
+    @InjectRepository(Client)
+    private clientRepository: Repository<Client>,
   ) { }
 
   getAll(status: string): Promise<Order[]> {
     if (!status) {
       return this.ordersRepository.find();
     }
-    return this.ordersRepository.find({where:{status: +status}, order:{dateTime: "ASC"}});
+    return this.ordersRepository.find({ where: { status: +status }, order: { dateTime: "ASC" } });
   }
 
   async save(orderDto: CreateOrderDTO): Promise<Order> {
-
-
-    // for (const itemCart of orderDto.cart.itens) {
-
-    //   var product = await this.productRepository.findOne({ where: { code: itemCart.product.code } });
-     
-    //   if (product) {
-    //     itemCart.product.id = product.id;
-    //   }
-    // }
 
     var order = new Order();
     order.observation = orderDto.observation;
@@ -40,6 +33,35 @@ export class OrderService {
     order.client = orderDto.client;
     order.dateTime = Date.now().toString()
 
+
+    order.cart.itens = await this.getExistentProducts(orderDto.cart.itens);
+    order.client = await this.getExistentClient(orderDto.client);
+
     return await this.ordersRepository.save(order);
+
+  }
+
+  private async getExistentProducts(itensCard: ItemCart[]): Promise<ItemCart[]> {
+    for (const itemCart of itensCard) {
+
+      var product = await this.productRepository.findOne({ where: { code: itemCart.product.code } });
+
+      if (product) {
+        itemCart.product = product;
+      }
+    }
+
+    return itensCard;
+  }
+
+  private async getExistentClient(client: Client) {
+
+    var clientExist = await this.clientRepository.findOne({ where: { cpf: client.cpf } });
+
+    if (clientExist)
+      client = clientExist
+
+    return client;
+
   }
 }

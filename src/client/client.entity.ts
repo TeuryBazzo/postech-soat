@@ -1,5 +1,5 @@
 import { Order } from 'src/order/order.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinTable } from 'typeorm';
 
 @Entity()
 export class Client {
@@ -16,5 +16,6 @@ export class Client {
   email: string;
 
   @OneToMany(type => Order, order => order.client)
+  @JoinTable()
   orders: Order[];
 }
