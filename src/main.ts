@@ -14,10 +14,9 @@ async function bootstrap() {
   useContainer(app.select(OrderModule), { fallbackOnErrors: true });
 
   const config = new DocumentBuilder()
-    .setTitle('fasfood soat1')
+    .setTitle('fastfood soat1')
     .setDescription('API de pedidos')
     .setVersion('1.0')
-    .addTag('fastfood')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
