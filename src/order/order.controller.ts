@@ -4,6 +4,7 @@ import { OrderService } from './order.service';
 import { Order } from './order.entity';
 import { CreateOrderDTO } from './dto/createorder.dto';
 import { ResponseDTO } from 'src/product/dto/response.dto';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller("api/v1/orders")
 export class OrderController {
@@ -15,6 +16,9 @@ export class OrderController {
   }
 
   @Post()
+  @ApiBody({
+    type : CreateOrderDTO
+  })
   post(@Body() orderDto: CreateOrderDTO): Promise<Order> {
     return this.appService.save(orderDto);
   }

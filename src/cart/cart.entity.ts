@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Product } from 'src/product/product.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, OneToOne, JoinColumn, JoinTable } from 'typeorm';
 
@@ -5,12 +6,17 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, OneToOne,
 export class Cart {
 
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
   @OneToMany(type => ItemCart, itemCart => itemCart.cart, {
     cascade: true,
   })
   @JoinTable()
+  @ApiProperty({ 
+    isArray: true,
+    type: 'array' 
+  })
   itens: ItemCart[];
 
 
@@ -21,6 +27,7 @@ export class Cart {
 export class ItemCart {
 
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
   @ManyToOne(() => Cart, (cart) => cart.itens)
@@ -30,12 +37,15 @@ export class ItemCart {
   {
     cascade: true,
   })
+  @ApiProperty()
   product: Product;
 
   @Column()
+  @ApiProperty()
   count: number;
 
   @Column()
+  @ApiProperty()
   observation: string;
 
 }

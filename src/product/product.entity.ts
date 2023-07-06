@@ -2,26 +2,33 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany, JoinTable 
 import { CreateProductDTO } from './dto/createproduct.dto';
 import { UpdateProductDTO } from './dto/updateproduct.dto';
 import { ItemCart } from 'src/cart/cart.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
   @Column()
+  @ApiProperty()
   code: string;
 
   @Column()
+  @ApiProperty()
   description: string;
 
   @Column()
+  @ApiProperty()
   price: number;
 
   @Column()
+  @ApiProperty()
   category: string;
 
   @OneToMany(type => ItemCart, itemCart => itemCart.cart)
   @JoinTable()
+  @ApiProperty()
   itemCart: ItemCart[]
 
   static newProductByCreate(createProductDto: CreateProductDTO) {
