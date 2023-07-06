@@ -2,9 +2,13 @@
 
 Pós Tech - SOAT1
 
-Miro : https://miro.com/app/board/uXjVMK9tIRA=/
+Notion - Wiki
 
-Notion : https://www.notion.so/alicefrancener/P-s-tech-Wiki-do-Projeto-dc69c63e90ac42cd935120bbb58555d8?pvs=4
+https://cultured-maple-e0d.notion.site/0d54e29fb7ce4a7d9111c8378c8f9e2e?v=646535e51d35443881df3e5d84db68f7&pvs=4
+
+Miro 
+
+https://miro.com/app/board/uXjVM9qlyR4=/?share_link_id=621731042903
 
 
 # How to run
@@ -12,6 +16,6 @@ Notion : https://www.notion.so/alicefrancener/P-s-tech-Wiki-do-Projeto-dc69c63e9
 Subir o docker compose dentro da pasta ./infra
 comando : docker compose up
 
-o docker compose ira subir a aplicação na porta 3000 e o banco de dados (mySql).
+O docker compose ira subir a aplicação na porta 3000 e o banco de dados (mySql).
 
-para acessar o swagger da aplicação basta acessar http://localhost:3000/api
+Para acessar o swagger da aplicação basta acessar http://localhost:3000/api
