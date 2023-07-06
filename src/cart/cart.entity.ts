@@ -1,5 +1,5 @@
 import { Product } from 'src/product/product.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, OneToOne, JoinColumn, JoinTable } from 'typeorm';
 
 @Entity()
 export class Cart {
@@ -8,8 +8,9 @@ export class Cart {
   id: number;
 
   @OneToMany(type => ItemCart, itemCart => itemCart.cart, {
-    cascade: true
+    cascade: true,
   })
+  @JoinTable()
   itens: ItemCart[];
 
 
@@ -25,10 +26,10 @@ export class ItemCart {
   @ManyToOne(() => Cart, (cart) => cart.itens)
   cart: Cart;
 
-  @OneToOne(() => Product, {
-    cascade: true
+  @ManyToOne(() => Product, (cart) => cart.itemCart,
+  {
+    cascade: true,
   })
-  @JoinColumn()
   product: Product;
 
   @Column()

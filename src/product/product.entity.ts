@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany, JoinTable } from 'typeorm';
 import { CreateProductDTO } from './dto/createproduct.dto';
 import { UpdateProductDTO } from './dto/updateproduct.dto';
+import { ItemCart } from 'src/cart/cart.entity';
 
 @Entity()
 export class Product {
@@ -18,6 +19,10 @@ export class Product {
 
   @Column()
   category: string;
+
+  @OneToMany(type => ItemCart, itemCart => itemCart.cart)
+  @JoinTable()
+  itemCart: ItemCart[]
 
   static newProductByCreate(createProductDto: CreateProductDTO) {
     let product = new Product()
