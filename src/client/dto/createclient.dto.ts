@@ -1,6 +1,6 @@
 import { IsEmail, IsNotEmpty, IsNumber, IsNumberString, Matches, MaxLength, MinLength, Validate } from "class-validator";
-import { IsUniqueCpf } from "../validations/isuniquecpf.validation";
 import { ApiProperty } from "@nestjs/swagger";
+import { IsUniqueCpf } from "../validations/isuniquecpf.validation";
 
 export class CreateClientDTO {
     @IsEmail()
