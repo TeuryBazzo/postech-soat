@@ -8,6 +8,7 @@ import { Product } from 'src/product/product.entity';
 import { Client } from 'src/client/client.entity';
 import { ConflictException } from '@nestjs/common';
 import { NotFoundException } from '@nestjs/common';
+import { UpdateStatusOrderDTO } from './dto/updatestatusorder.dto';
 
 @Injectable()
 export class OrderService {
@@ -76,6 +77,21 @@ export class OrderService {
       client = clientExist
 
     return client;
+
+  }
+
+  async updateStatus(orderId: string, updateStatusOrderDTO: UpdateStatusOrderDTO): Promise<Order> {
+    var order = await this.ordersRepository.findOneBy({
+      id: +orderId
+    })
+    
+    if(!order){
+      throw new NotFoundException()
+    }
+
+    order.status = updateStatusOrderDTO.status
+
+    return this.ordersRepository.save(order);
 
   }
 }
