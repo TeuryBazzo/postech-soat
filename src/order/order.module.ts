@@ -11,6 +11,7 @@ import { ClientController } from 'src/client/client.controller';
 import { ClientService } from 'src/client/client.service';
 import { IsUniqueCpf } from 'src/client/validations/isuniquecpf.validation';
 
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([Order, Client, Product])
