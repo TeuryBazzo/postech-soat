@@ -4,18 +4,22 @@ import { Product } from "./product.entity";
 import { CreateProductDTO } from "./dto/createproduct.dto";
 import { UpdateProductDTO } from "./dto/updateproduct.dto";
 import { ResponseDTO } from "./dto/response.dto";
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
 @Controller("/api/v1/products")
+@ApiTags('products')
 export class ProductController {
   constructor(private readonly appService: ProductService) { }
 
   @Get()
+  @ApiOperation({ summary: 'get products by category' })
   async getAll(@Query('category') category: string): Promise<ResponseDTO> {
     let products = await this.appService.getAll(category)
     return new ResponseDTO(200, '', products)
   }
 
   @Post()
+  @ApiOperation({ summary: 'create product' })
   async create(@Body() createProductDto: CreateProductDTO): Promise<ResponseDTO> {
     try {
       let product = await this.appService.create(createProductDto)
@@ -26,6 +30,7 @@ export class ProductController {
   }
 
   @Put('/:id')
+  @ApiOperation({ summary: 'update product by id' })
   async update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDTO): Promise<ResponseDTO> {
     try {
       let product =  await this.appService.update(id, updateProductDto)
@@ -36,6 +41,7 @@ export class ProductController {
   }
 
   @Delete('/:id')
+  @ApiOperation({ summary: 'delete product by id' })
   async delete(@Param('id') id: string, @Body() product: Product): Promise<ResponseDTO> {
     try {
       await this.appService.delete(id, product)

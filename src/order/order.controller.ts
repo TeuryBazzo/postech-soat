@@ -4,14 +4,16 @@ import { OrderService } from './order.service';
 import { Order } from './order.entity';
 import { CreateOrderDTO } from './dto/createorder.dto';
 import { ResponseDTO } from 'src/product/dto/response.dto';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UpdateStatusOrderDTO } from './dto/updatestatusorder.dto';
 
 @Controller("api/v1/orders")
+@ApiTags('orders')
 export class OrderController {
   constructor(private readonly appService: OrderService) { }
 
   @Get()
+  @ApiOperation({ summary: 'get orders by status' })
   getAll(@Query('status') status: string): Promise<Order[]> {
     return this.appService.getAll(status);
   }
@@ -20,11 +22,13 @@ export class OrderController {
   @ApiBody({
     type : CreateOrderDTO
   })
+  @ApiOperation({ summary: 'create order' })
   post(@Body() orderDto: CreateOrderDTO): Promise<Order> {
     return this.appService.save(orderDto);
   }
 
   @Put("checkout")
+  @ApiOperation({ summary: 'finish de order' })
   async put(@Query('orderId') orderId:number): Promise<any> {
     try {
       let order = await this.appService.fakeCheckout(orderId)
@@ -39,17 +43,9 @@ export class OrderController {
       return this.handleResponseError(error)
     }
   }
-  
-  handleResponseError (error: any): ResponseDTO {
-    if (error instanceof NotFoundException) {
-      return new ResponseDTO(404, 'order not found', null)
-    } else if (error instanceof ConflictException) {
-      return new ResponseDTO(409, 'code already exists', null)
-    }
-    return new ResponseDTO(500, 'internal server error', null)
-  }
 
   @Patch("/:id/status")
+  @ApiOperation({ summary: 'update status order' })
   async updateStatus(@Param('id') orderId: string, @Body() updateStatusOrderDTO: UpdateStatusOrderDTO): Promise<any> {
     try {
       let order = await this.appService.updateStatus(orderId, updateStatusOrderDTO)
@@ -57,6 +53,15 @@ export class OrderController {
     } catch (error) {
       return this.handleResponseError(error)
     }
+  }
+
+  handleResponseError (error: any): ResponseDTO {
+    if (error instanceof NotFoundException) {
+      return new ResponseDTO(404, 'order not found', null)
+    } else if (error instanceof ConflictException) {
+      return new ResponseDTO(409, 'code already exists', null)
+    }
+    return new ResponseDTO(500, 'internal server error', null)
   }
 
 }
