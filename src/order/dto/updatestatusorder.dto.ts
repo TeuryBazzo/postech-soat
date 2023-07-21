@@ -1,8 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString } from "class-validator";
+import { StatusOrder } from "../order.entity";
+import { IsEnum, IsNotEmpty} from "class-validator";
 
 export class UpdateStatusOrderDTO {
+
     @ApiProperty()
-    @IsString()
-    status: number;
+    @IsNotEmpty()
+    @IsEnum(StatusOrder)
+    status: StatusOrder;
 }
