@@ -1,10 +1,11 @@
-import { ConflictException, NotFoundException, Put } from '@nestjs/common';
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { ConflictException, NotFoundException, Patch, Put } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Param } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { Order } from './order.entity';
 import { CreateOrderDTO } from './dto/createorder.dto';
 import { ResponseDTO } from 'src/product/dto/response.dto';
 import { ApiBody } from '@nestjs/swagger';
+import { UpdateStatusOrderDTO } from './dto/updatestatusorder.dto';
 
 @Controller("api/v1/orders")
 export class OrderController {
@@ -46,6 +47,16 @@ export class OrderController {
       return new ResponseDTO(409, 'code already exists', null)
     }
     return new ResponseDTO(500, 'internal server error', null)
+  }
+
+  @Patch("/:id/status")
+  async updateStatus(@Param('id') orderId: string, @Body() updateStatusOrderDTO: UpdateStatusOrderDTO): Promise<any> {
+    try {
+      let order = await this.appService.updateStatus(orderId, updateStatusOrderDTO)
+      return new ResponseDTO(200, 'status was updated', order)
+    } catch (error) {
+      return this.handleResponseError(error)
+    }
   }
 
 }
