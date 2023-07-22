@@ -9,11 +9,6 @@ import { ResponseDTO } from "./dto/response.dto";
 export class ProductController {
   constructor(private readonly appService: ProductService) { }
 
-  @Get('/ola')
-  async ola(): Promise<ResponseDTO> {
-    return new ResponseDTO(200, 'ola', null)
-  }
-  
   @Get()
   async getAll(@Query('category') category: string): Promise<ResponseDTO> {
     let products = await this.appService.getAll(category)
@@ -22,6 +17,7 @@ export class ProductController {
 
   @Post()
   async create(@Body() createProductDto: CreateProductDTO): Promise<ResponseDTO> {
+   
     try {
       let product = await this.appService.create(createProductDto)
       return new ResponseDTO(201, 'product was created successfully', product)
@@ -33,6 +29,7 @@ export class ProductController {
   @Put('/:id')
   async update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDTO): Promise<ResponseDTO> {
     try {
+
       let product =  await this.appService.update(id, updateProductDto)
       return new ResponseDTO(200, 'product was updated successfully', product)
     } catch (error) {
