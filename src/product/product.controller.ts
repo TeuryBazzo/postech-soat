@@ -1,4 +1,4 @@
-import { Body, ConflictException, Controller, Delete, Get, HttpCode, HttpException, InternalServerErrorException, NotFoundException, Param, Post, Put, Query } from "@nestjs/common";
+import { Body, ConflictException, Controller, Delete, Get, HttpCode, HttpException, InternalServerErrorException, NotFoundException, Param, Post, Put, Query, Res } from "@nestjs/common";
 import { ProductService } from "./product.service";
 import { Product } from "./product.entity";
 import { CreateProductDTO } from "./dto/createproduct.dto";
@@ -9,6 +9,11 @@ import { ResponseDTO } from "./dto/response.dto";
 export class ProductController {
   constructor(private readonly appService: ProductService) { }
 
+  @Get('/ola')
+  async ola(): Promise<ResponseDTO> {
+    return new ResponseDTO(200, 'ola', null)
+  }
+  
   @Get()
   async getAll(@Query('category') category: string): Promise<ResponseDTO> {
     let products = await this.appService.getAll(category)
