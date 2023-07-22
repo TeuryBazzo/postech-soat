@@ -28,7 +28,6 @@ export class ProductController {
   @Put('/:id')
   async update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDTO): Promise<ResponseDTO> {
     try {
-
       let product =  await this.appService.update(id, updateProductDto)
       return new ResponseDTO(200, 'product was updated successfully', product)
     } catch (error) {
