@@ -17,7 +17,6 @@ export class ProductController {
 
   @Post()
   async create(@Body() createProductDto: CreateProductDTO): Promise<ResponseDTO> {
-   
     try {
       let product = await this.appService.create(createProductDto)
       return new ResponseDTO(201, 'product was created successfully', product)
