@@ -16,6 +16,15 @@ export class OrderController {
     return this.appService.getAll(status);
   }
 
+  @Get("/:id/status-pagamento")
+  async getPaymentStatus(@Param('id') orderId: string): Promise<any> {
+    const order = await this.appService.findById(+orderId);
+    if (!order) {
+      throw new NotFoundException('Order not found!');
+    }
+    return {paymentstatus: order.paymentstatus};
+  }
+
   @Post()
   @ApiBody({
     type : CreateOrderDTO

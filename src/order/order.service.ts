@@ -28,6 +28,15 @@ export class OrderService {
     return this.ordersRepository.find({ where: { status: +status }, order: { dateTime: "ASC" } });
   }
 
+  async findById(orderId: number){
+    var storedOrder = await this.ordersRepository.findOneBy({ id: orderId})
+    
+    if (!storedOrder) 
+      throw new NotFoundException();
+
+    return storedOrder;
+  }
+
   async fakeCheckout(orderId: number){
     var storedOrder = await this.ordersRepository.findOneBy({ id: orderId})
     
