@@ -1,4 +1,4 @@
-import { Body, ConflictException, Controller, Delete, Get, HttpCode, HttpException, InternalServerErrorException, NotFoundException, Param, Post, Put, Query } from "@nestjs/common";
+import { Body, ConflictException, Controller, Delete, Get, HttpCode, HttpException, InternalServerErrorException, NotFoundException, Param, Post, Put, Query, Res } from "@nestjs/common";
 import { ProductService } from "./product.service";
 import { Product } from "./product.entity";
 import { CreateProductDTO } from "./dto/createproduct.dto";
