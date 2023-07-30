@@ -18,6 +18,13 @@ export class OrderController {
     return this.appService.getAll(status);
   }
 
+  
+  @Get("unfinished")
+  @ApiOperation({ summary: 'get orders unfinished' })
+  getAllUnfinished(): Promise<Order[]> {
+    return this.appService.getAllUnfinished();
+  }
+
   @Post()
   @ApiBody({
     type : CreateOrderDTO
