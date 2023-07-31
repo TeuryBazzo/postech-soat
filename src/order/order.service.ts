@@ -2,7 +2,7 @@ import { ItemCart } from './../cart/cart.entity';
 import { Injectable } from '@nestjs/common';
 import { Order, StatusOrder } from './order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { CreateOrderDTO } from './dto/createorder.dto';
 import { Product } from 'src/product/product.entity';
 import { Client } from 'src/client/client.entity';
@@ -49,6 +49,31 @@ export class OrderService {
     return storedOrder;
   }
 
+  async getAllUnfinished(): Promise<Order[]> {
+
+    let orders = await this.ordersRepository.find({
+       where: { status: Not(StatusOrder.FINALIZADO) }
+       , order: { dateTime: "ASC" } 
+       , relations : {
+          cart: {
+            itens: {
+              product : true
+            }
+          },
+          client: true
+       }
+      });
+
+    return orders.sort((order1, order2) => {
+      if(order1.status > order2.status)
+        return -1
+      return 1;
+    })
+  }
+
+
+
+  
   async save(orderDto: CreateOrderDTO): Promise<Order> {
 
     var order = new Order();

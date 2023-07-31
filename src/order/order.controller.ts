@@ -18,7 +18,15 @@ export class OrderController {
     return this.appService.getAll(status);
   }
 
+  @Get("unfinished")
+  @ApiOperation({ summary: 'get orders unfinished' })
+  getAllUnfinished(): Promise<Order[]> {
+    return this.appService.getAllUnfinished();
+  }
+
+
   @Get("/:id/status-pagamento")
+  @ApiOperation({ summary: 'get order payment status' })
   async getPaymentStatus(@Param('id') orderId: string): Promise<any> {
     const order = await this.appService.findById(+orderId);
     if (!order) {
