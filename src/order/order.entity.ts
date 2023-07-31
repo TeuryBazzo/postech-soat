@@ -2,6 +2,12 @@ import { Cart } from 'src/cart/cart.entity';
 import { Client } from 'src/client/client.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
+export enum PaymentStatusOrder {
+  NAO_REALIZADO = 1,
+  APROVADO = 2,
+  RECUSADO = 3,
+}
+
 export enum StatusOrder {
   RECEBIDO = 1,
   EM_PREPARACAO = 2,
@@ -33,6 +39,13 @@ export class Order {
     default: StatusOrder.RECEBIDO
 })
   status: StatusOrder;
+
+  @Column({
+    type: "enum",
+    enum: PaymentStatusOrder,
+    default: PaymentStatusOrder.NAO_REALIZADO
+})
+  paymentstatus: PaymentStatusOrder;
 
   @Column({
     nullable: true
