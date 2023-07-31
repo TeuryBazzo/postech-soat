@@ -51,7 +51,18 @@ export class OrderService {
 
   async getAllUnfinished(): Promise<Order[]> {
 
-    let orders = await this.ordersRepository.find({ where: { status: Not(StatusOrder.FINALIZADO) }, order: { dateTime: "ASC" } });
+    let orders = await this.ordersRepository.find({
+       where: { status: Not(StatusOrder.FINALIZADO) }
+       , order: { dateTime: "ASC" } 
+       , relations : {
+          cart: {
+            itens: {
+              product : true
+            }
+          },
+          client: true
+       }
+      });
 
     return orders.sort((order1, order2) => {
       if(order1.status > order2.status)
