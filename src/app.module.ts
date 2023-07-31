@@ -5,6 +5,7 @@ import { ClientModule } from './client/client.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DBConfigService } from './config/db.config.service';
 import { ConfigModule } from '@nestjs/config';
+import { PaymentController } from './payment/payment.controller';
 
 @Module({
   imports: [
@@ -19,5 +20,6 @@ import { ConfigModule } from '@nestjs/config';
       inject: [DBConfigService]
     })
   ],
+  controllers: [PaymentController],
 })
 export class AppModule {}
