@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: soatdb
+  labels:
+    app: soatdb
+spec:
+  containers:
+    - name: soatapp
+      image: mysql:8.0.33
+      ports:
+        - containerPort: 3306
+      envFrom:
+        - configMapRef:
+            name: soatdb-configmap

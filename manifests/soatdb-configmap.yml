@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: soatapp-configmap
+  name: soatdb-configmap
 data:
   MYSQL_DATABASE: soatdb
   MYSQL_ROOT_PASSWORD: root
