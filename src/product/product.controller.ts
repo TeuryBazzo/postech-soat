@@ -42,9 +42,9 @@ export class ProductController {
 
   @Delete('/:id')
   @ApiOperation({ summary: 'delete product by id' })
-  async delete(@Param('id') id: string, @Body() product: Product): Promise<ResponseDTO> {
+  async delete(@Param('id') id: number): Promise<ResponseDTO> {
     try {
-      await this.appService.delete(id, product)
+      await this.appService.delete(id)
       return new ResponseDTO(200, 'product was deleted successfully', null)
     } catch (error) {
       return this.handleResponseError(error)
