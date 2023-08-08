@@ -5,12 +5,14 @@ import { ClientModule } from './client/client.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DBConfigService } from './config/db.config.service';
 import { ConfigModule } from '@nestjs/config';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
     OrderModule,
     ProductModule, 
     ClientModule,
+    PaymentModule,
     ConfigModule.forRoot({
       isGlobal: true
     }),
