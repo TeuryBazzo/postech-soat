@@ -25,7 +25,7 @@ export class OrderService {
     if (!status) {
       return this.ordersRepository.getAll();
     }
-    return this.ordersRepository.getBtStatus(status);
+    return this.ordersRepository.getByStatus(status);
   }
 
   async findById(orderId: number){

@@ -14,7 +14,7 @@ export class OrderRepository {
         return await this.ordersRepository.find();
     }
 
-    async getBtStatus(status: string): Promise<Order[]> {
+    async getByStatus(status: string): Promise<Order[]> {
 
         return await this.ordersRepository.find({ where: { status: +status }, order: { dateTime: "ASC" } });
     }

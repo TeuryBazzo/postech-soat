@@ -10,6 +10,7 @@ export class ClientService {
   constructor(
     private clientRepository: ClientRepository,
   ) { }
+  
 
   async getByCpf(cpf: string): Promise<Client | null> {
     return await this.clientRepository.getByCpf(cpf);
@@ -25,5 +26,9 @@ export class ClientService {
      return await this.clientRepository.save(client);
   }
 
+  async IsUniqueCpf(cpf : string) : Promise<boolean> {
+    var client = await this.clientRepository.getByCpf(cpf);
+    return client == null;
+  }
   
 }
