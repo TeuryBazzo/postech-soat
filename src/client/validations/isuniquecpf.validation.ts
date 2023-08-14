@@ -3,31 +3,22 @@ import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments 
 import { Client } from '../client.entity';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import { ClientRepository } from '../client.repository';
+import { ClientService } from '../client.service';
 
 @ValidatorConstraint({ name: 'IsUniqueCpf', async: true })
 @Injectable()
 export class IsUniqueCpf implements ValidatorConstraintInterface {
 
     constructor( 
-    @InjectRepository(Client)
-    private clientRepository: Repository<Client>,){
+    private clientService: ClientService,){
     }
 
   async validate(text: string, args: ValidationArguments) :  Promise<boolean> {
-    return await this.IsUniqueCpf(text);
+    return await this.clientService.IsUniqueCpf(text);
   }
 
   defaultMessage(args: ValidationArguments) {
     return 'CPF already exist';
-  }
-
-  private async IsUniqueCpf(cpf : string) : Promise<boolean> {
-    var client = await this.clientRepository.findOne({
-      where:{
-        cpf :cpf
-      }
-    });
-
-    return client == null;
   }
 }
