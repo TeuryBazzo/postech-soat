@@ -63,7 +63,7 @@ export class OrderController {
 
   @Patch("/:id/status")
   @ApiOperation({ summary: 'update status order' })
-  async updateStatus(@Param('id') orderId: string, @Body() updateStatusOrderDTO: UpdateStatusOrderDTO): Promise<any> {
+  async updateStatus(@Param('id') orderId: number, @Body() updateStatusOrderDTO: UpdateStatusOrderDTO): Promise<any> {
     try {
       let order = await this.appService.updateStatus(orderId, updateStatusOrderDTO)
       return new ResponseDTO(200, 'status was updated', order)

@@ -3,20 +3,17 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Client } from './client.entity';
 import { CreateClientDTO } from './dto/createclient.dto';
+import { ClientRepository } from './client.repository';
 
 @Injectable()
 export class ClientService {
   constructor(
-    @InjectRepository(Client)
-    private clientRepository: Repository<Client>,
+    private clientRepository: ClientRepository,
   ) { }
+  
 
-  getByCpf(cpf: string): Promise<Client | null> {
-    return this.clientRepository.findOne({
-      where: {
-        cpf: cpf,
-      }
-    });
+  async getByCpf(cpf: string): Promise<Client | null> {
+    return await this.clientRepository.getByCpf(cpf);
   }
 
   async create(createClientDto: CreateClientDTO): Promise<Client | null> {
@@ -29,5 +26,9 @@ export class ClientService {
      return await this.clientRepository.save(client);
   }
 
+  async IsUniqueCpf(cpf : string) : Promise<boolean> {
+    var client = await this.clientRepository.getByCpf(cpf);
+    return client == null;
+  }
   
 }
