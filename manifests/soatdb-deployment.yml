@@ -17,6 +17,13 @@ spec:
           envFrom:
             - configMapRef:
                 name: soatdb-configmap
+          volumeMounts:
+            - name: shared-data
+              mountPath: /var/lib/mysql
+      volumes:
+      - name: shared-data
+        persistentVolumeClaim:
+          claimName: soatdb-pvc
   selector:
     matchLabels:
       app: soatdb
