@@ -22,6 +22,5 @@ import { PaymentController } from './payment/payment.controller';
       inject: [DBConfigService]
     })
   ],
-  controllers: [PaymentController],
 })
 export class AppModule {}
