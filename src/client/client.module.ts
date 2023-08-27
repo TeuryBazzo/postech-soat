@@ -22,6 +22,9 @@ import { IsUniqueCpf } from "./validations/isuniquecpf.validation";
         CreateClientUserCase,
         IsUniqueCpfUserCase
     ],
+    exports : [
+        GetClientByCpfUserCase
+    ]
 })
 export class ClientModule {
     constructor() { }

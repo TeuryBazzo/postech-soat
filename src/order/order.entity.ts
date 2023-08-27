@@ -53,4 +53,16 @@ export class Order {
   observation: string;
 
   totalPrice: number;
+
+
+  public setStatus(status: StatusOrder) {
+    this.status = status;
+  }
+
+  public getTotalPrice() {
+    if(!this.cart || !this.cart.itens)
+      throw "itens car are empty";
+
+    return this.cart.itens.reduce((sum, current) => sum + current.product.price, 0);
+  }
 }

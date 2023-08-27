@@ -9,6 +9,7 @@ import { DeleteProductUserCase } from "./userCases/deleteProduct.userCase";
 import { GetAllProductsUserCase } from "./userCases/getAllProducts.userCase";
 import { GetProductsByCategoryUserCase } from "./userCases/getProductsByCategory.userCase";
 import { UpdateProductUserCase } from "./userCases/updateProduct.userCase";
+import { GetProductsByCodeUserCase } from "./userCases/getProductsByCode.userCase";
 
 @Module({
     imports: [        
@@ -21,8 +22,12 @@ import { UpdateProductUserCase } from "./userCases/updateProduct.userCase";
         DeleteProductUserCase,
         GetAllProductsUserCase,
         GetProductsByCategoryUserCase,
-        UpdateProductUserCase
+        UpdateProductUserCase,
+        GetProductsByCodeUserCase
     ],
+    exports: [
+        GetProductsByCodeUserCase
+    ]
 })
 export class ProductModule {
 constructor() { }
