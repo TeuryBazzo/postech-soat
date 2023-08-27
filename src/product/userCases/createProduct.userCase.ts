@@ -14,7 +14,7 @@ export class CreateProductUserCase {
         let product = Product.newProductByCreate(createProductDto)
         const storedProduct = await this.productRepository.getByCode(product.code);
         if (storedProduct) {
-          throw new ConflictException()
+          throw new ConflictException("Code already exist")
         }
         return await this.productRepository.save(product)
       }

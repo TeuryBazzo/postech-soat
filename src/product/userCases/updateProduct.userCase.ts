@@ -14,12 +14,12 @@ export class UpdateProductUserCase {
         let product = Product.newProductByUpdate(id, updateProductDto)
         const storedProduct = await this.productRepository.getById(product.id)
         if (!storedProduct) {
-          throw new NotFoundException()
+          throw new NotFoundException("Product not found")
         }
     
         const otherStoredProduct = await this.productRepository.getByCode(product.code);
         if (otherStoredProduct != null && otherStoredProduct.id != product.id) {
-          throw new ConflictException() 
+          throw new ConflictException("Code already exist") 
         }
         return await this.productRepository.save(product);
       }

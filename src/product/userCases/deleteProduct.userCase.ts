@@ -12,7 +12,7 @@ export class DeleteProductUserCase {
       async handle(id: number): Promise<Product> {
         const storedProduct = await this.productRepository.getById(id)
         if (storedProduct == null) {
-          throw new NotFoundException()
+          throw new NotFoundException("product not found")
         } 
         return await this.productRepository.remove(storedProduct)
       }

@@ -11,7 +11,7 @@ export class IsUniqueCpfUserCase {
 
     async handle(cpf: string): Promise<boolean> {
         var client = await this.clientRepository.getByCpf(cpf);
-        return client == null;
+        return client != null;
     }
 
 }

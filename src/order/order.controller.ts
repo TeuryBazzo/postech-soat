@@ -3,7 +3,6 @@ import { ConflictException, NotFoundException, Patch, Put } from '@nestjs/common
 import { Body, Controller, Get, Post, Query, Param } from '@nestjs/common';
 import { Order } from './order.entity';
 import { CreateOrderDTO } from './dto/createorder.dto';
-import { ResponseDTO } from 'src/product/dto/response.dto';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UpdateStatusOrderDTO } from './dto/updatestatusorder.dto';
 import { GetAllOrdersUserCase } from './userCases/getAllOrders.userCase';
@@ -12,6 +11,7 @@ import { GetOrdersByStatusUserCase } from './userCases/getOrdersByStatus.userCas
 import { CreateOrderUserCase } from './userCases/createOrder.userCase';
 import { UpdateStatusOrderUserCase } from './userCases/updateStatusOrder.userCase';
 import { GetOrderByIdUserCase } from './userCases/getOrderById.userCase';
+import { ResponseDTO } from 'src/presentation/helpers/response.dto';
 
 @Controller("api/v1/orders")
 @ApiTags('orders')

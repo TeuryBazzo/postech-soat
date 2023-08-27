@@ -10,6 +10,7 @@ import { GetAllProductsUserCase } from "./userCases/getAllProducts.userCase";
 import { GetProductsByCategoryUserCase } from "./userCases/getProductsByCategory.userCase";
 import { UpdateProductUserCase } from "./userCases/updateProduct.userCase";
 import { GetProductsByCodeUserCase } from "./userCases/getProductsByCode.userCase";
+import { ReponseHttpHelper } from "src/presentation/helpers/excption.http.helper";
 
 @Module({
     imports: [        
@@ -23,7 +24,8 @@ import { GetProductsByCodeUserCase } from "./userCases/getProductsByCode.userCas
         GetAllProductsUserCase,
         GetProductsByCategoryUserCase,
         UpdateProductUserCase,
-        GetProductsByCodeUserCase
+        GetProductsByCodeUserCase,
+        ReponseHttpHelper
     ],
     exports: [
         GetProductsByCodeUserCase

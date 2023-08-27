@@ -7,8 +7,8 @@ import { DataSource } from "typeorm";
 import { ClientRepository } from "./client.repository";
 import { CreateClientUserCase } from "./userCases/createClient.userCase";
 import { GetClientByCpfUserCase } from "./userCases/getClientByCpf.userCase";
+import { ReponseHttpHelper } from "src/presentation/helpers/excption.http.helper";
 import { IsUniqueCpfUserCase } from "./userCases/isUniqueCpf.userCase";
-import { IsUniqueCpf } from "./validations/isuniquecpf.validation";
 
 @Module({
     imports: [
@@ -16,11 +16,11 @@ import { IsUniqueCpf } from "./validations/isuniquecpf.validation";
     ],
     controllers: [ClientController],
     providers: [
-        IsUniqueCpf,
+        ReponseHttpHelper,
         ClientRepository,
+        IsUniqueCpfUserCase,
         GetClientByCpfUserCase,
         CreateClientUserCase,
-        IsUniqueCpfUserCase
     ],
     exports : [
         GetClientByCpfUserCase
