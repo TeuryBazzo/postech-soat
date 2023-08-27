@@ -18,6 +18,7 @@ import { GetOrdersByStatusUserCase } from './userCases/getOrdersByStatus.userCas
 import { GetOrdersUnfinishedUserCase } from './userCases/getOrdersUnfinished.userCase';
 import { UpdateStatusOrderUserCase } from './userCases/updateStatusOrder.userCase';
 import { ProductModule } from 'src/product/product.module';
+import { ReponseHttpHelper } from 'src/presentation/helpers/excption.http.helper';
 
 
 @Module({
@@ -28,6 +29,7 @@ import { ProductModule } from 'src/product/product.module';
   ],
   controllers: [OrderController],
   providers: [
+    ReponseHttpHelper,
     OrderRepository,
     CheckoutOrderUserCase,
     CreateOrderUserCase,

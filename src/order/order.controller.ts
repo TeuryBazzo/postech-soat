@@ -12,11 +12,14 @@ import { CreateOrderUserCase } from './userCases/createOrder.userCase';
 import { UpdateStatusOrderUserCase } from './userCases/updateStatusOrder.userCase';
 import { GetOrderByIdUserCase } from './userCases/getOrderById.userCase';
 import { ResponseDTO } from 'src/presentation/helpers/response.dto';
+import { ReponseHttpHelper } from 'src/presentation/helpers/excption.http.helper';
+import { HttpStatusCode } from 'axios';
 
 @Controller("api/v1/orders")
 @ApiTags('orders')
 export class OrderController {
   constructor(
+    private readonly reponseHttpHelper: ReponseHttpHelper,
     private readonly createOrderUserCase: CreateOrderUserCase,
     private readonly getOrdersByStatusUserCase: GetOrdersByStatusUserCase,
     private readonly getAllOrdersUserCase: GetAllOrdersUserCase,
@@ -24,52 +27,74 @@ export class OrderController {
     private readonly checkoutOrderUserCase: CheckoutOrderUserCase,
     private readonly updateStatusOrderUserCase: UpdateStatusOrderUserCase,
     private readonly getOrderByIdUserCase: GetOrderByIdUserCase,
-    ) { }
+  ) { }
 
   @Get()
   @ApiOperation({ summary: 'get orders by status' })
-  async getAll(@Query('status') status: string): Promise<Order[]> {
+  async getAll(@Query('status') status: string): Promise<ResponseDTO> {
 
-    return status ?
-      await this.getOrdersByStatusUserCase.handle(status) :
-      await this.getAllOrdersUserCase.handle();
+    try {
+      const orders = status ?
+        await this.getOrdersByStatusUserCase.handle(status) :
+        await this.getAllOrdersUserCase.handle();
+
+      return this.reponseHttpHelper.handleReponse(HttpStatusCode.Ok, '', orders)
+    } catch (error) {
+      return this.reponseHttpHelper.handleException(error);
+    }
   }
+
 
   @Get("unfinished")
   @ApiOperation({ summary: 'get orders unfinished' })
-  getAllUnfinished(): Promise<Order[]> {
-    return this.getOrdersUnfinishedUserCase.handle();
-  }
+  async getAllUnfinished(): Promise<ResponseDTO> {
+    try {
+      const orders = await this.getOrdersUnfinishedUserCase.handle();
 
+      return this.reponseHttpHelper.handleReponse(HttpStatusCode.Ok, '', orders)
+    } catch (error) {
+      return this.reponseHttpHelper.handleException(error);
+    }
+  }
 
   @Get("/:id/status-pagamento")
   @ApiOperation({ summary: 'get order payment status' })
-  async getPaymentStatus(@Param('id') orderId: string): Promise<any> {
-    const order = await this.getOrderByIdUserCase.handle(+orderId);
-    if (!order) {
-      throw new NotFoundException('Order not found!');
+  async getPaymentStatus(@Param('id') orderId: string): Promise<ResponseDTO> {
+    try {
+
+      const order = await this.getOrderByIdUserCase.handle(+orderId);
+
+      return this.reponseHttpHelper.handleReponse(HttpStatusCode.Ok, '', order.paymentstatus)
+
+    } catch (error) {
+      return this.reponseHttpHelper.handleException(error);
     }
-    return {paymentstatus: order.paymentstatus};
   }
 
   @Post()
   @ApiBody({
-    type : CreateOrderDTO
+    type: CreateOrderDTO
   })
   @ApiOperation({ summary: 'create order' })
-  post(@Body() orderDto: CreateOrderDTO): Promise<Order> {
-    return this.createOrderUserCase.handle(orderDto);
+  async post(@Body() orderDto: CreateOrderDTO): Promise<ResponseDTO> {
+    try {
+      let order = await this.createOrderUserCase.handle(orderDto);
+      return this.reponseHttpHelper.handleReponse(HttpStatusCode.Created, '', order)
+
+    } catch (error) {
+      return this.reponseHttpHelper.handleException(error);
+    }
   }
 
   @Put("checkout")
   @ApiOperation({ summary: 'finish de order' })
-  async put(@Query('orderId') orderId:number): Promise<any> {
+  async put(@Query('orderId') orderId: number): Promise<any> {
     try {
       let order = await this.checkoutOrderUserCase.handle(orderId)
 
-      return new ResponseDTO(201, 'order was finished', order)
+      return this.reponseHttpHelper.handleReponse(HttpStatusCode.Ok, 'order was finished', order)
     } catch (error) {
-      return this.handleResponseError(error)
+      return this.reponseHttpHelper.handleException(error);
     }
   }
 
@@ -78,19 +103,11 @@ export class OrderController {
   async updateStatus(@Param('id') orderId: number, @Body() updateStatusOrderDTO: UpdateStatusOrderDTO): Promise<any> {
     try {
       let order = await this.updateStatusOrderUserCase.handle(orderId, updateStatusOrderDTO)
-      return new ResponseDTO(200, 'status was updated', order)
-    } catch (error) {
-      return this.handleResponseError(error)
-    }
-  }
 
-  handleResponseError (error: any): ResponseDTO {
-    if (error instanceof NotFoundException) {
-      return new ResponseDTO(404, 'order not found', null)
-    } else if (error instanceof ConflictException) {
-      return new ResponseDTO(409, 'code already exists', null)
+      return this.reponseHttpHelper.handleReponse(HttpStatusCode.Ok, 'status was updated', order)
+    } catch (error) {
+      return this.reponseHttpHelper.handleException(error);
     }
-    return new ResponseDTO(500, 'internal server error', null)
   }
 
 }

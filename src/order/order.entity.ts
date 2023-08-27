@@ -61,7 +61,7 @@ export class Order {
 
   public getTotalPrice() {
     if(!this.cart || !this.cart.itens)
-      throw "itens car are empty";
+      throw new Error("itens car are empty, we cannot calculate total price.");
 
     return this.cart.itens.reduce((sum, current) => sum + current.product.price, 0);
   }

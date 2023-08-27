@@ -13,7 +13,7 @@ export class GetOrderByIdUserCase {
         var storedOrder = await this.orderRepository.getById(orderId)
         
         if (!storedOrder) 
-          throw new NotFoundException();
+          throw new NotFoundException('Order not found!');
     
         return storedOrder;
       }
