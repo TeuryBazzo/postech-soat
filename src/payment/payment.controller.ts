@@ -1,21 +1,25 @@
 import { Controller, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
 import { PaymentWebhookDto } from './dto/createPayment.dto';
-import { PaymentService } from './payment.service';
+import { SendPayamentUserCase } from './userCases/sendPayment.userCase';
+import { ReponseHttpHelper } from 'src/presentation/helpers/excption.http.helper';
+import { HttpStatusCode } from 'axios';
 
 @Controller('/api/v1/webhook')
 export class PaymentController {
-  constructor(private readonly paymentService: PaymentService) {}
+  constructor(
+    private readonly reponseHttpHelper: ReponseHttpHelper,
+    private readonly sendPayamentUserCase: SendPayamentUserCase) {}
 
   @Post('createPayment')
   async createPaymentWebhook(@Body() data: PaymentWebhookDto) {
     try {
       console.log('Received payment webhook:', data);
-      await this.paymentService.sendPaymentNotification(data);
+
+      await this.sendPayamentUserCase.handle(data);
       
-      return { success: true };
+      return this.reponseHttpHelper.handleReponse(HttpStatusCode.Ok, "create payment success")
     } catch (error) {
-      
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+      return  this.reponseHttpHelper.handleException(error);
     }
   }
 
@@ -36,9 +40,9 @@ export class PaymentController {
         // Tratar outros casos de status de pagamento, se necessário
       }
 
-      return { success: true };
+      return this.reponseHttpHelper.handleReponse(HttpStatusCode.Ok, "create was received")
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+      return this.reponseHttpHelper.handleException(error);
     }
   }
 

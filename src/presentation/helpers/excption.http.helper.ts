@@ -5,9 +5,10 @@ import { HttpStatusCode } from "axios";
 @Injectable()
 export class ReponseHttpHelper {
 
-  handleReponse(statusCode: number, message: string, data: any): ResponseDTO {
+  handleReponse(statusCode: number, message: string, data: any = {}): ResponseDTO {
     return new ResponseDTO(statusCode, message, data);
   }
+
 
   handleException(error: Error): ResponseDTO {
 
