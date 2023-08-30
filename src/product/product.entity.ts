@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany, JoinTable } from 'typeorm';
 import { CreateProductDTO } from './dto/createproduct.dto';
 import { UpdateProductDTO } from './dto/updateproduct.dto';
-import { ItemCart } from 'src/cart/cart.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { ItemCart } from 'src/cart/itemCart.entity';
 
 @Entity()
 export class Product {
@@ -28,7 +28,6 @@ export class Product {
 
   @OneToMany(type => ItemCart, itemCart => itemCart.cart)
   @JoinTable()
-  @ApiProperty()
   itemCart: ItemCart[]
 
   static newProductByCreate(createProductDto: CreateProductDTO) {
