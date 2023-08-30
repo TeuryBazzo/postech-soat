@@ -1,6 +1,24 @@
-import { HttpStatus } from "@nestjs/common"
+import { HttpStatus, INestApplication } from "@nestjs/common"
+import { Test, TestingModule } from "@nestjs/testing";
+import { AppModule } from "src/app.module";
 import { CreateProductDTO } from "src/product/dto/createproduct.dto"
 import * as request from "supertest"
+
+let app: INestApplication;
+
+beforeAll(async () => {
+  const moduleFixture: TestingModule = await Test.createTestingModule({
+    imports: [AppModule],
+  }).compile();
+
+  app = moduleFixture.createNestApplication();
+  await app.init();
+});
+
+afterAll(async () => {
+  await app.close();
+});
+
 
 describe("Product", () => {
     const productUrl = `http://localhost:3000/api/v1/products`
@@ -13,8 +31,8 @@ describe("Product", () => {
           description: 'X-burger',
           price: 10
         }     
-        return request(productUrl)
-          .post('')
+        return request(app.getHttpServer())
+          .post('api/v1/products')
           .set("Accept", "application/json")
           .send(mockProduct)
           .expect((response: request.Response) => {
