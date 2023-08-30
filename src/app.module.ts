@@ -22,5 +22,6 @@ import { ReponseHttpHelper } from './presentation/helpers/excption.http.helper';
       inject: [DBConfigService]
     })
   ]
+
 })
 export class AppModule {}
