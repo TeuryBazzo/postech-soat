@@ -1,32 +1,45 @@
 import { Module } from '@nestjs/common';
 import { OrderController } from './order.controller';
-import { OrderService } from './order.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Order } from './order.entity';
 import { Product } from 'src/product/product.entity';
 import { Client } from 'src/client/client.entity';
 import { ClientController } from 'src/client/client.controller';
-import { ClientService } from 'src/client/client.service';
-import { IsUniqueCpf } from 'src/client/validations/isuniquecpf.validation';
 import { ClientRepository } from 'src/client/client.repository';
 import { OrderRepository } from './order.repository';
 import { ProductRepository } from 'src/product/product.repository';
+import { ClientModule } from 'src/client/client.module';
+import { CheckoutOrderUserCase } from './userCases/checkoutOrder.userCase';
+import { CreateOrderUserCase } from './userCases/createOrder.userCase';
+import { GetAllOrdersUserCase } from './userCases/getAllOrders.userCase';
+import { GetOrderByIdUserCase } from './userCases/getOrderById.userCase';
+import { GetOrdersByStatusUserCase } from './userCases/getOrdersByStatus.userCase';
+import { GetOrdersUnfinishedUserCase } from './userCases/getOrdersUnfinished.userCase';
+import { UpdateStatusOrderUserCase } from './userCases/updateStatusOrder.userCase';
+import { ProductModule } from 'src/product/product.module';
+import { ReponseHttpHelper } from 'src/presentation/helpers/excption.http.helper';
 
 
 @Module({
   imports: [
+    ClientModule,
+    ProductModule,
     TypeOrmModule.forFeature([Order, Client, Product])
   ],
-  controllers: [OrderController, ClientController],
-  providers: [OrderService,
-     ClientService,
-     IsUniqueCpf,
-     ClientRepository,
-     OrderRepository,
-     ProductRepository
-    ]
+  controllers: [OrderController],
+  providers: [
+    ReponseHttpHelper,
+    OrderRepository,
+    CheckoutOrderUserCase,
+    CreateOrderUserCase,
+    GetAllOrdersUserCase,
+    GetOrderByIdUserCase,
+    GetOrdersByStatusUserCase,
+    GetOrdersUnfinishedUserCase,
+    UpdateStatusOrderUserCase
+  ]
 })
 export class OrderModule {
-  constructor(private dataSource: DataSource) { }
+  constructor() { }
 }

@@ -20,7 +20,18 @@ export class OrderRepository {
     }
 
     async getById(orderId: number) {
-        return await this.ordersRepository.findOneBy({ id: orderId })
+        return await this.ordersRepository.findOne(
+            {
+                where: { id: orderId },
+                relations: {
+                    cart: {
+                        itens: {
+                            product: true
+                        }
+                    }
+                }
+            }
+        )
 
     }
 

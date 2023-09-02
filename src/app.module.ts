@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DBConfigService } from './config/db.config.service';
 import { ConfigModule } from '@nestjs/config';
 import { PaymentModule } from './payment/payment.module';
-import { PaymentController } from './payment/payment.controller';
+import { ReponseHttpHelper } from './presentation/helpers/excption.http.helper';
 
 @Module({
   imports: [
@@ -21,7 +21,6 @@ import { PaymentController } from './payment/payment.controller';
       useClass: DBConfigService,
       inject: [DBConfigService]
     })
-  ],
-  controllers: [],
+  ]
 })
 export class AppModule {}
