@@ -8,4 +8,4 @@ spec:
     - port: 3000
       nodePort: 30001
   selector:
-    app: soatapp
+    app: soatapp-deployment
