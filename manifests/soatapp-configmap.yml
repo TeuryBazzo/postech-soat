@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: soatapp-configmap
 data:
-  DB_HOST: soatdb-svc
+  DB_HOST: 'soatdb-svc'
+  DB_PORT: '3306'
   DB_USER: soatuser
   DB_PASSWORD: soatpassword
   DB_NAME: soatdb
-  DB_PORT: "3306"
