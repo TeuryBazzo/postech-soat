@@ -1,25 +1,31 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Product } from 'src/product/product.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, OneToOne, JoinColumn, JoinTable } from 'typeorm';
-import { ItemCart } from './itemCart.entity';
+import { Cart } from './cart.entity';
 
 @Entity()
-export class Cart {
+export class ItemCart {
 
   @PrimaryGeneratedColumn()
   @ApiProperty()
   id: number;
 
-  @OneToMany(type => ItemCart, itemCart => itemCart.cart, {
+  @ManyToOne(() => Cart, (cart) => cart.itens)
+  cart: Cart;
+
+  @ManyToOne(() => Product, (cart) => cart.itemCart,
+  {
     cascade: true,
   })
-  @JoinTable()
-  @ApiProperty({ 
-    type: ItemCart,
-    isArray: true
-  })
-  itens: ItemCart[];
+  @ApiProperty()
+  product: Product;
 
+  @Column()
+  @ApiProperty()
+  count: number;
+
+  @Column()
+  @ApiProperty()
+  observation: string;
 
 }
-
