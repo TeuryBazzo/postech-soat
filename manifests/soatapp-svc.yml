@@ -6,6 +6,5 @@ spec:
   type: LoadBalancer
   ports:
     - port: 3000
-      targetPort: 30001
   selector:
-    app: soatapp-deployment
+    app: soatapp
