@@ -5,12 +5,15 @@ import { ClientModule } from './client/client.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DBConfigService } from './config/db.config.service';
 import { ConfigModule } from '@nestjs/config';
+import { PaymentModule } from './payment/payment.module';
+import { ReponseHttpHelper } from './presentation/helpers/excption.http.helper';
 
 @Module({
   imports: [
     OrderModule,
     ProductModule, 
     ClientModule,
+    PaymentModule,
     ConfigModule.forRoot({
       isGlobal: true
     }),
@@ -18,6 +21,7 @@ import { ConfigModule } from '@nestjs/config';
       useClass: DBConfigService,
       inject: [DBConfigService]
     })
-  ],
+  ]
+
 })
 export class AppModule {}
