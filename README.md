@@ -10,6 +10,10 @@ Miro
 
 https://miro.com/app/board/uXjVM9qlyR4=/?share_link_id=621731042903
 
+Acesso a API no EKS
+
+http://a83f27ccb59044e86b3144b62c748d2c-888176295.us-east-2.elb.amazonaws.com/api
+
 
 # How to run
 
