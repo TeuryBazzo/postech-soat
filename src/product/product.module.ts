@@ -4,12 +4,12 @@ import { Product } from "./product.entity";
 import { ProductController } from "./product.controller";
 import { DataSource } from "typeorm";
 import { ProductRepository } from "./product.repository";
-import { CreateProductUserCase } from "./userCases/createProduct.userCase";
-import { DeleteProductUserCase } from "./userCases/deleteProduct.userCase";
-import { GetAllProductsUserCase } from "./userCases/getAllProducts.userCase";
-import { GetProductsByCategoryUserCase } from "./userCases/getProductsByCategory.userCase";
-import { UpdateProductUserCase } from "./userCases/updateProduct.userCase";
-import { GetProductsByCodeUserCase } from "./userCases/getProductsByCode.userCase";
+import { CreateProductuseCase } from "./useCases/createProduct.useCase";
+import { DeleteProductuseCase } from "./useCases/deleteProduct.useCase";
+import { GetAllProductsuseCase } from "./useCases/getAllProducts.useCase";
+import { GetProductsByCategoryuseCase } from "./useCases/getProductsByCategory.useCase";
+import { UpdateProductuseCase } from "./useCases/updateProduct.useCase";
+import { GetProductsByCodeuseCase } from "./useCases/getProductsByCode.useCase";
 import { ReponseHttpHelper } from "src/presentation/helpers/excption.http.helper";
 
 @Module({
@@ -19,16 +19,16 @@ import { ReponseHttpHelper } from "src/presentation/helpers/excption.http.helper
     controllers: [ProductController],
     providers: [ 
         ProductRepository,
-        CreateProductUserCase,
-        DeleteProductUserCase,
-        GetAllProductsUserCase,
-        GetProductsByCategoryUserCase,
-        UpdateProductUserCase,
-        GetProductsByCodeUserCase,
+        CreateProductuseCase,
+        DeleteProductuseCase,
+        GetAllProductsuseCase,
+        GetProductsByCategoryuseCase,
+        UpdateProductuseCase,
+        GetProductsByCodeuseCase,
         ReponseHttpHelper
     ],
     exports: [
-        GetProductsByCodeUserCase
+        GetProductsByCodeuseCase
     ]
 })
 export class ProductModule {

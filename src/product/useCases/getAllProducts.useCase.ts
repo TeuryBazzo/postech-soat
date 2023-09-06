@@ -3,14 +3,14 @@ import { Product } from "../product.entity";
 import { ProductRepository } from "../product.repository";
 
 @Injectable()
-export class GetProductsByCodeUserCase {
+export class GetAllProductsuseCase {
 
     constructor(
         private productRepository: ProductRepository,
       ) { }
 
-      async handle(code: string): Promise<Product | null> {
-        return await this.productRepository.getByCode(code);
+      handle(): Promise<Product[]> {
+        return this.productRepository.getAll();
       }
     
 }
