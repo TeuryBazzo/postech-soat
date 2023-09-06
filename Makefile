@@ -1,5 +1,8 @@
-make dev-up:
+dev-up:
 	docker-compose -f docker-compose.dev.yml up
 
-make dev-down:
+dev-down:
 	docker-compose -f docker-compose.dev.yml down
+
+e2e:
+	npm run test:e2e

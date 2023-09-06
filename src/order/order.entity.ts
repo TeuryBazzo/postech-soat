@@ -1,5 +1,5 @@
-import { Cart } from 'src/cart/cart.entity';
-import { Client } from 'src/client/client.entity';
+import { Cart } from '../cart/cart.entity';
+import { Client } from '../client/client.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
 export enum PaymentStatusOrder {

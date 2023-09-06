@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Order } from 'src/order/order.entity';
+import { Order } from '../order/order.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinTable } from 'typeorm';
 
 @Entity()

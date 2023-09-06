@@ -1,27 +1,20 @@
 import { HttpStatus, INestApplication } from "@nestjs/common"
 import { Test, TestingModule } from "@nestjs/testing";
-import { AppModule } from "src/app.module";
+import { AppModule } from "../src/app.module";
 import { CreateProductDTO } from "src/product/dto/createproduct.dto"
 import * as request from "supertest"
 
-let app: INestApplication;
-
-beforeAll(async () => {
-  const moduleFixture: TestingModule = await Test.createTestingModule({
-    imports: [AppModule],
-  }).compile();
-
-  app = moduleFixture.createNestApplication();
-  await app.init();
-});
-
-afterAll(async () => {
-  await app.close();
-});
-
-
 describe("Product", () => {
-    const productUrl = `http://localhost:3000/api/v1/products`
+  let app: INestApplication;
+
+  beforeEach(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
+    }).compile();
+
+    app = moduleFixture.createNestApplication();
+    await app.init();
+  });
     describe("creating a new valid product", () => {
       let productId: number
       it("create product successfully", () => {
@@ -32,7 +25,7 @@ describe("Product", () => {
           price: 10
         }     
         return request(app.getHttpServer())
-          .post('api/v1/products')
+          .post('/api/v1/products')
           .set("Accept", "application/json")
           .send(mockProduct)
           .expect((response: request.Response) => {
@@ -52,8 +45,8 @@ describe("Product", () => {
           .expect(HttpStatus.CREATED)
       })
       it("get one product in list", () => {    
-        return request(productUrl)
-          .get('')
+        return request(app.getHttpServer())
+          .get('/api/v1/products')
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
@@ -72,8 +65,8 @@ describe("Product", () => {
           .expect(HttpStatus.OK)
       })
       it("Removing", () => {  
-        return request(productUrl)
-          .delete(`/${productId}`)
+        return request(app.getHttpServer())
+          .delete(`/api/v1/products/${productId}`)
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
@@ -97,8 +90,8 @@ describe("Product", () => {
           description: 'X-burger',
           price: 10
         }     
-        return request(productUrl)
-          .post('')
+        return request(app.getHttpServer())
+          .post('/api/v1/products')
           .set("Accept", "application/json")
           .send(mockProduct)
           .expect((response: request.Response) => {
@@ -118,8 +111,8 @@ describe("Product", () => {
           .expect(HttpStatus.CREATED)
       })
       it("get one product in list", () => {    
-        return request(productUrl)
-          .get('')
+        return request(app.getHttpServer())
+          .get('/api/v1/products')
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
@@ -144,8 +137,8 @@ describe("Product", () => {
           description: 'X-burger',
           price: 10
         }     
-        return request(productUrl)
-          .post('')
+        return request(app.getHttpServer())
+          .post('/api/v1/products')
           .set("Accept", "application/json")
           .send(mockProduct)
           .expect((response: request.Response) => {
@@ -155,14 +148,14 @@ describe("Product", () => {
                 message
             } = response.body
             expect(status).toEqual(HttpStatus.CONFLICT),
-            expect(message).toEqual('code already exists'),
+            expect(message).toEqual('Code already exists'),
             expect(data).toEqual(null)
           })
           .expect(HttpStatus.CREATED)
       })
       it("get one product in list", () => {    
-        return request(productUrl)
-          .get('')
+        return request(app.getHttpServer())
+          .get('/api/v1/products')
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
@@ -181,8 +174,8 @@ describe("Product", () => {
           .expect(HttpStatus.OK)
       })
       it("Removing", () => {  
-        return request(productUrl)
-          .delete(`/${productId}`)
+        return request(app.getHttpServer())
+          .delete(`/api/v1/products/${productId}`)
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
@@ -206,8 +199,8 @@ describe("Product", () => {
           description: 'X-burger',
           price: 10
         }     
-        return request(productUrl)
-          .post('')
+        return request(app.getHttpServer())
+          .post('/api/v1/products')
           .set("Accept", "application/json")
           .send(mockProduct)
           .expect((response: request.Response) => {
@@ -227,8 +220,8 @@ describe("Product", () => {
           .expect(HttpStatus.CREATED)
       })
       it("get one product in list", () => {    
-        return request(productUrl)
-          .get('')
+        return request(app.getHttpServer())
+          .get('/api/v1/products')
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
@@ -253,8 +246,8 @@ describe("Product", () => {
           description: 'X-salada',
           price: 15
         }     
-        return request(productUrl)
-          .put(`/${productId}`)
+        return request(app.getHttpServer())
+          .put(`/api/v1/products/${productId}`)
           .set("Accept", "application/json")
           .send(mockProduct)
           .expect((response: request.Response) => {
@@ -273,8 +266,8 @@ describe("Product", () => {
           .expect(HttpStatus.OK)
       })
       it("get one product with updated data in list", () => {    
-        return request(productUrl)
-          .get('')
+        return request(app.getHttpServer())
+          .get('/api/v1/products')
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
@@ -293,8 +286,8 @@ describe("Product", () => {
           .expect(HttpStatus.OK)
       })
       it("Removing", () => {  
-        return request(productUrl)
-          .delete(`/${productId}`)
+        return request(app.getHttpServer())
+          .delete(`/api/v1/products/${productId}`)
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
@@ -311,8 +304,8 @@ describe("Product", () => {
     })
     describe("updating a product does not exist", () => {
       it("get empty list", () => {    
-        return request(productUrl)
-          .get('')
+        return request(app.getHttpServer())
+          .get('/api/v1/products')
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
@@ -333,8 +326,8 @@ describe("Product", () => {
           description: 'X-salada',
           price: 15
         }     
-        return request(productUrl)
-          .put(`/1`)
+        return request(app.getHttpServer())
+          .put(`/api/v1/products/1`)
           .set("Accept", "application/json")
           .send(mockProduct)
           .expect((response: request.Response) => {
@@ -344,7 +337,7 @@ describe("Product", () => {
                 message
             } = response.body
             expect(status).toEqual(HttpStatus.NOT_FOUND),
-            expect(message).toEqual('product not found'),
+            expect(message).toEqual('Product not found'),
             expect(data).toEqual(null)
           })
           .expect(HttpStatus.OK)
@@ -359,8 +352,8 @@ describe("Product", () => {
           description: 'X-burger',
           price: 10
         }     
-        return request(productUrl)
-          .post('')
+        return request(app.getHttpServer())
+          .post('/api/v1/products')
           .set("Accept", "application/json")
           .send(mockProduct)
           .expect((response: request.Response) => {
@@ -380,8 +373,8 @@ describe("Product", () => {
           .expect(HttpStatus.CREATED)
       })
       it("get one product in list", () => {    
-        return request(productUrl)
-          .get('')
+        return request(app.getHttpServer())
+          .get('/api/v1/products')
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
@@ -400,8 +393,8 @@ describe("Product", () => {
           .expect(HttpStatus.OK)
       })
       it("delete produc successfully", () => {  
-        return request(productUrl)
-          .delete(`/${productId}`)
+        return request(app.getHttpServer())
+          .delete(`/api/v1/products/${productId}`)
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
@@ -416,8 +409,8 @@ describe("Product", () => {
           .expect(HttpStatus.OK)
       })
       it("get empty list", () => {    
-        return request(productUrl)
-          .get('')
+        return request(app.getHttpServer())
+          .get('/api/v1/products')
           .set("Accept", "application/json")
           .expect((response: request.Response) => {
             const {
