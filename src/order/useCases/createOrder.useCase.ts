@@ -2,18 +2,18 @@ import { Injectable } from "@nestjs/common";
 import { OrderRepository } from "../order.repository";
 import { Order } from "../order.entity";
 import { CreateOrderDTO } from "../dto/createorder.dto";
-import { GetClientByCpfUserCase } from "src/client/userCases/getClientByCpf.userCase";
-import { GetProductsByCodeUserCase } from "src/product/userCases/getProductsByCode.userCase";
+import { GetClientByCpfuseCase } from "src/client/useCases/getClientByCpf.useCase";
+import { GetProductsByCodeuseCase } from "src/product/useCases/getProductsByCode.useCase";
 import { Client } from "src/client/client.entity";
 import { ItemCart } from "src/cart/itemCart.entity";
 
 @Injectable()
-export class CreateOrderUserCase {
+export class CreateOrderuseCase {
 
     constructor(
         private orderRepository: OrderRepository,
-        private getClientByCpfUserCase: GetClientByCpfUserCase,
-        private getProductsByCodeUserCase: GetProductsByCodeUserCase
+        private getClientByCpfuseCase: GetClientByCpfuseCase,
+        private getProductsByCodeuseCase: GetProductsByCodeuseCase
     ) { }
 
 
@@ -36,7 +36,7 @@ export class CreateOrderUserCase {
       private async getExistentProducts(itensCard: ItemCart[]): Promise<ItemCart[]> {
         for (const itemCart of itensCard) {
     
-          var product = await this.getProductsByCodeUserCase.handle(itemCart.product.code);
+          var product = await this.getProductsByCodeuseCase.handle(itemCart.product.code);
     
           if (product) {
             itemCart.product = product;
@@ -48,7 +48,7 @@ export class CreateOrderUserCase {
     
       private async getExistentClient(client: Client) {
     
-        var clientExist = await this.getClientByCpfUserCase.handle(client.cpf);
+        var clientExist = await this.getClientByCpfuseCase.handle(client.cpf);
     
         if (clientExist)
           client = clientExist

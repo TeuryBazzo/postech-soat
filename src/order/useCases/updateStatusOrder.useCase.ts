@@ -4,7 +4,7 @@ import { UpdateStatusOrderDTO } from "../dto/updatestatusorder.dto";
 import { Order } from "../order.entity";
 
 @Injectable()
-export class UpdateStatusOrderUserCase {
+export class UpdateStatusOrderuseCase {
 
     constructor(
         private orderRepository: OrderRepository,

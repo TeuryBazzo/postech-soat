@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { ClientRepository } from "../client.repository";
 
 @Injectable()
-export class IsUniqueCpfUserCase {
+export class IsUniqueCpfuseCase {
 
     constructor(
         private clientRepository: ClientRepository
