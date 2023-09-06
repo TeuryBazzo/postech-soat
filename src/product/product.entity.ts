@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany, JoinTable 
 import { CreateProductDTO } from './dto/createproduct.dto';
 import { UpdateProductDTO } from './dto/updateproduct.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { ItemCart } from '../cart/itemCart.entity';
+import { ItemCart } from '../cart/itemcart.entity';
 
 @Entity()
 export class Product {

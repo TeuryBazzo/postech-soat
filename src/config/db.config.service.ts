@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
 import { Cart } from "../cart/cart.entity";
-import { ItemCart } from "../cart/itemCart.entity";
+import { ItemCart } from "../cart/itemcart.entity";
 import { Client } from "../client/client.entity";
 import { Order } from "../order/order.entity";
 import { Product } from "../product/product.entity";

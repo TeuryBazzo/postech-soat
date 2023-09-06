@@ -6,15 +6,15 @@ import { Product } from '../product/product.entity';
 import { Client } from '../client/client.entity';
 import { OrderRepository } from './order.repository';
 import { ClientModule } from '../client/client.module';
-import { CheckoutOrderuseCase } from './useCases/checkoutOrder.useCase';
-import { CreateOrderuseCase } from './useCases/createOrder.useCase';
-import { GetAllOrdersuseCase } from './useCases/getAllOrders.useCase';
-import { GetOrderByIduseCase } from './useCases/getOrderById.useCase';
-import { GetOrdersByStatususeCase } from './useCases/getOrdersByStatus.useCase';
-import { GetOrdersUnfinisheduseCase } from './useCases/getOrdersUnfinished.useCase';
-import { UpdateStatusOrderuseCase } from './useCases/updateStatusOrder.useCase';
+import { CheckoutOrderuseCase } from './usecases/checkoutorder.usecase';
+import { CreateOrderuseCase } from './usecases/createorder.usecase';
+import { GetAllOrdersuseCase } from './usecases/getallorders.usecase';
+import { GetOrderByIduseCase } from './usecases/getorderbyid.usecase';
+import { GetOrdersByStatususeCase } from './usecases/getordersbystatus.usecase';
+import { GetOrdersUnfinisheduseCase } from './usecases/getordersunfinished.usecase';
+import { UpdateStatusOrderuseCase } from './usecases/updatestatusorder.usecase';
 import { ProductModule } from '../product/product.module';
-import { ReponseHttpHelper } from '../presentation/helpers/excption.http.helper';
+import { ReponseHttpHelper } from '../presentation/helpers/exception.http.helper';
 import { Cart } from '../cart/cart.entity';
 
 

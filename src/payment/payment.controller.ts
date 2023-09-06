@@ -1,7 +1,7 @@
 import { Controller, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
 import { PaymentWebhookDto } from './dto/createPayment.dto';
-import { SendPayamentuseCase } from './useCases/sendPayment.useCase';
-import { ReponseHttpHelper } from '../presentation/helpers/excption.http.helper';
+import { SendPayamentuseCase } from './usecases/sendpayment.usecase';
+import { ReponseHttpHelper } from '../presentation/helpers/exception.http.helper';
 import { HttpStatusCode } from 'axios';
 
 @Controller('/api/v1/webhook')

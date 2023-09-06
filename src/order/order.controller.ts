@@ -1,17 +1,17 @@
-import { CheckoutOrderuseCase } from './useCases/checkoutOrder.useCase';
+import { CheckoutOrderuseCase } from './usecases/checkoutorder.usecase';
 import { ConflictException, NotFoundException, Patch, Put } from '@nestjs/common';
 import { Body, Controller, Get, Post, Query, Param } from '@nestjs/common';
 import { CreateOrderDTO } from './dto/createorder.dto';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UpdateStatusOrderDTO } from './dto/updatestatusorder.dto';
-import { GetAllOrdersuseCase } from './useCases/getAllOrders.useCase';
-import { GetOrdersUnfinisheduseCase } from './useCases/getOrdersUnfinished.useCase';
-import { GetOrdersByStatususeCase } from './useCases/getOrdersByStatus.useCase';
-import { CreateOrderuseCase } from './useCases/createOrder.useCase';
-import { UpdateStatusOrderuseCase } from './useCases/updateStatusOrder.useCase';
-import { GetOrderByIduseCase } from './useCases/getOrderById.useCase';
+import { GetAllOrdersuseCase } from './usecases/getallorders.usecase';
+import { GetOrdersUnfinisheduseCase } from './usecases/getordersunfinished.usecase';
+import { GetOrdersByStatususeCase } from './usecases/getordersbystatus.usecase';
+import { CreateOrderuseCase } from './usecases/createorder.usecase';
+import { UpdateStatusOrderuseCase } from './usecases/updatestatusorder.usecase';
+import { GetOrderByIduseCase } from './usecases/getorderbyid.usecase';
 import { ResponseDTO } from '../presentation/helpers/response.dto';
-import { ReponseHttpHelper } from '../presentation/helpers/excption.http.helper';
+import { ReponseHttpHelper } from '../presentation/helpers/exception.http.helper';
 import { HttpStatusCode } from 'axios';
 
 @Controller("api/v1/orders")

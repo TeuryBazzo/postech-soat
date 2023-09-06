@@ -4,10 +4,10 @@ import { Client } from "./client.entity";
 import { Order } from "../order/order.entity";
 import { ClientController } from "./client.controller";
 import { ClientRepository } from "./client.repository";
-import { CreateClientuseCase } from "./useCases/createClient.useCase";
-import { GetClientByCpfuseCase } from "./useCases/getClientByCpf.useCase";
-import { ReponseHttpHelper } from "../presentation/helpers/excption.http.helper";
-import { IsUniqueCpfuseCase } from "./useCases/isUniqueCpf.useCase";
+import { CreateClientuseCase } from "./usecases/createClient.useCase";
+import { GetClientByCpfuseCase } from "./usecases/getClientByCpf.useCase";
+import { ReponseHttpHelper } from "../presentation/helpers/exception.http.helper";
+import { IsUniqueCpfuseCase } from "./usecases/isUniqueCpf.useCase";
 
 @Module({
     imports: [

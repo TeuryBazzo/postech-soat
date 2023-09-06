@@ -2,12 +2,12 @@ import { Body, ConflictException, Controller, Delete, Get, NotFoundException, Pa
 import { CreateProductDTO } from "./dto/createproduct.dto";
 import { UpdateProductDTO } from "./dto/updateproduct.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
-import { GetProductsByCategoryuseCase } from './useCases/getProductsByCategory.useCase';
-import { GetAllProductsuseCase } from './useCases/getAllProducts.useCase';
-import { CreateProductuseCase } from './useCases/createProduct.useCase';
-import { UpdateProductuseCase } from './useCases/updateProduct.useCase';
-import { DeleteProductuseCase } from './useCases/deleteProduct.useCase';
-import { ReponseHttpHelper } from "../presentation/helpers/excption.http.helper";
+import { GetProductsByCategoryuseCase } from './usecases/getproductsbycategory.usecase';
+import { GetAllProductsuseCase } from './usecases/getallproducts.usecase';
+import { CreateProductuseCase } from './usecases/createproduct.usecase';
+import { UpdateProductuseCase } from './usecases/updateproduct.usecase';
+import { DeleteProductuseCase } from './usecases/deleteproduct.usecase';
+import { ReponseHttpHelper } from "../presentation/helpers/exception.http.helper";
 import { ResponseDTO } from "../presentation/helpers/response.dto";
 
 @Controller("/api/v1/products")

@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CreateClientDTO } from './dto/createclient.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { GetClientByCpfuseCase } from './useCases/getClientByCpf.useCase';
-import { ReponseHttpHelper } from '../presentation/helpers/excption.http.helper';
+import { GetClientByCpfuseCase } from './usecases/getClientByCpf.useCase';
+import { ReponseHttpHelper } from '../presentation/helpers/exception.http.helper';
 import { ResponseDTO } from '../presentation/helpers/response.dto';
 import { HttpStatusCode } from 'axios';
-import { CreateClientuseCase } from './useCases/createClient.useCase';
+import { CreateClientuseCase } from './usecases/createClient.useCase';
 
 
 @Controller("api/v1/clients")

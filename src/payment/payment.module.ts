@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { PaymentController } from './payment.controller';
-import { SendPayamentuseCase } from './useCases/sendPayment.useCase';
-import { ReponseHttpHelper } from '../presentation/helpers/excption.http.helper';
+import { SendPayamentuseCase } from './usecases/sendpayment.usecase';
+import { ReponseHttpHelper } from '../presentation/helpers/exception.http.helper';
 
 @Module({
   controllers: [PaymentController],
