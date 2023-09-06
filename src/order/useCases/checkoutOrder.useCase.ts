@@ -3,7 +3,7 @@ import { OrderRepository } from "../order.repository";
 import { StatusOrder } from "../order.entity";
 
 @Injectable()
-export class CheckoutOrderUserCase {
+export class CheckoutOrderuseCase {
 
     constructor(
         private orderRepository: OrderRepository,

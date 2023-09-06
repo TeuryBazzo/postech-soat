@@ -3,15 +3,15 @@ import { OrderRepository } from "../order.repository";
 import { Order } from "../order.entity";
 
 @Injectable()
-export class GetAllOrdersUserCase {
+export class GetOrdersByStatususeCase {
 
     constructor(
         private orderRepository: OrderRepository
     ) { }
 
 
-    async handle(): Promise<Order[]> {
-        return await this.orderRepository.getAll();
+    async handle(status: string): Promise<Order[]> {
+        return await this.orderRepository.getByStatus(status);
       }
 
 }

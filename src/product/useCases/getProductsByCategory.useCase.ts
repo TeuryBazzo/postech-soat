@@ -3,7 +3,7 @@ import { Product } from "../product.entity";
 import { ProductRepository } from "../product.repository";
 
 @Injectable()
-export class GetProductsByCategoryUserCase {
+export class GetProductsByCategoryuseCase {
 
     constructor(
         private productRepository: ProductRepository,

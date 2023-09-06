@@ -1,6 +1,6 @@
 import { Controller, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
 import { PaymentWebhookDto } from './dto/createPayment.dto';
-import { SendPayamentUserCase } from './userCases/sendPayment.userCase';
+import { SendPayamentuseCase } from './useCases/sendPayment.useCase';
 import { ReponseHttpHelper } from 'src/presentation/helpers/excption.http.helper';
 import { HttpStatusCode } from 'axios';
 
@@ -8,14 +8,14 @@ import { HttpStatusCode } from 'axios';
 export class PaymentController {
   constructor(
     private readonly reponseHttpHelper: ReponseHttpHelper,
-    private readonly sendPayamentUserCase: SendPayamentUserCase) {}
+    private readonly sendPayamentuseCase: SendPayamentuseCase) {}
 
   @Post('createPayment')
   async createPaymentWebhook(@Body() data: PaymentWebhookDto) {
     try {
       console.log('Received payment webhook:', data);
 
-      await this.sendPayamentUserCase.handle(data);
+      await this.sendPayamentuseCase.handle(data);
       
       return this.reponseHttpHelper.handleReponse(HttpStatusCode.Ok, "create payment success")
     } catch (error) {

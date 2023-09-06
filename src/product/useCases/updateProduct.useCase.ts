@@ -4,7 +4,7 @@ import { ProductRepository } from "../product.repository";
 import { UpdateProductDTO } from "../dto/updateproduct.dto";
 
 @Injectable()
-export class UpdateProductUserCase {
+export class UpdateProductuseCase {
 
     constructor(
         private productRepository: ProductRepository,
