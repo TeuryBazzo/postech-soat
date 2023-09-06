@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsInt, IsNotEmpty, IsNumber, Matches, Max, Min } from "class-validator";
-import { Cart } from "src/cart/cart.entity";
-import { Client } from "src/client/client.entity";
+import { Cart } from "../../cart/cart.entity";
+import { Client } from "../../client/client.entity";
 
 export class CreateOrderDTO {
 
