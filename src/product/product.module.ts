@@ -2,7 +2,6 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Product } from "./product.entity";
 import { ProductController } from "./product.controller";
-import { DataSource } from "typeorm";
 import { ProductRepository } from "./product.repository";
 import { CreateProductuseCase } from "./useCases/createProduct.useCase";
 import { DeleteProductuseCase } from "./useCases/deleteProduct.useCase";
@@ -10,7 +9,7 @@ import { GetAllProductsuseCase } from "./useCases/getAllProducts.useCase";
 import { GetProductsByCategoryuseCase } from "./useCases/getProductsByCategory.useCase";
 import { UpdateProductuseCase } from "./useCases/updateProduct.useCase";
 import { GetProductsByCodeuseCase } from "./useCases/getProductsByCode.useCase";
-import { ReponseHttpHelper } from "src/presentation/helpers/excption.http.helper";
+import { ReponseHttpHelper } from "../presentation/helpers/excption.http.helper";
 
 @Module({
     imports: [        

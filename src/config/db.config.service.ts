@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
-import { Cart } from "src/cart/cart.entity";
-import { ItemCart } from "src/cart/itemCart.entity";
-import { Client } from "src/client/client.entity";
-import { Order } from "src/order/order.entity";
-import { Product } from "src/product/product.entity";
+import { Cart } from "../cart/cart.entity";
+import { ItemCart } from "../cart/itemCart.entity";
+import { Client } from "../client/client.entity";
+import { Order } from "../order/order.entity";
+import { Product } from "../product/product.entity";
 
 @Injectable()
 export class DBConfigService implements TypeOrmOptionsFactory {

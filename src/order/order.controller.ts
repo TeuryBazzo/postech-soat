@@ -12,7 +12,7 @@ import { CreateOrderuseCase } from './useCases/createOrder.useCase';
 import { UpdateStatusOrderuseCase } from './useCases/updateStatusOrder.useCase';
 import { GetOrderByIduseCase } from './useCases/getOrderById.useCase';
 import { ResponseDTO } from 'src/presentation/helpers/response.dto';
-import { ReponseHttpHelper } from 'src/presentation/helpers/excption.http.helper';
+import { ReponseHttpHelper } from '../presentation/helpers/excption.http.helper';
 import { HttpStatusCode } from 'axios';
 
 @Controller("api/v1/orders")

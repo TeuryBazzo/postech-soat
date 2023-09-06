@@ -7,8 +7,8 @@ import { GetAllProductsuseCase } from './useCases/getAllProducts.useCase';
 import { CreateProductuseCase } from './useCases/createProduct.useCase';
 import { UpdateProductuseCase } from './useCases/updateProduct.useCase';
 import { DeleteProductuseCase } from './useCases/deleteProduct.useCase';
-import { ReponseHttpHelper } from "src/presentation/helpers/excption.http.helper";
-import { ResponseDTO } from "src/presentation/helpers/response.dto";
+import { ReponseHttpHelper } from "../presentation/helpers/excption.http.helper";
+import { ResponseDTO } from "../presentation/helpers/response.dto";
 
 @Controller("/api/v1/products")
 @ApiTags('products')
