@@ -1,7 +1,6 @@
 import { CheckoutOrderuseCase } from './useCases/checkoutOrder.useCase';
 import { ConflictException, NotFoundException, Patch, Put } from '@nestjs/common';
 import { Body, Controller, Get, Post, Query, Param } from '@nestjs/common';
-import { Order } from './order.entity';
 import { CreateOrderDTO } from './dto/createorder.dto';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UpdateStatusOrderDTO } from './dto/updatestatusorder.dto';
@@ -11,7 +10,7 @@ import { GetOrdersByStatususeCase } from './useCases/getOrdersByStatus.useCase';
 import { CreateOrderuseCase } from './useCases/createOrder.useCase';
 import { UpdateStatusOrderuseCase } from './useCases/updateStatusOrder.useCase';
 import { GetOrderByIduseCase } from './useCases/getOrderById.useCase';
-import { ResponseDTO } from 'src/presentation/helpers/response.dto';
+import { ResponseDTO } from '../presentation/helpers/response.dto';
 import { ReponseHttpHelper } from '../presentation/helpers/excption.http.helper';
 import { HttpStatusCode } from 'axios';
 

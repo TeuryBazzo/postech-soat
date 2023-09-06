@@ -4,8 +4,8 @@ import { Order } from "../order.entity";
 import { CreateOrderDTO } from "../dto/createorder.dto";
 import { GetClientByCpfuseCase } from "../../client/useCases/getClientByCpf.useCase";
 import { GetProductsByCodeuseCase } from "../../product/useCases/getProductsByCode.useCase";
-import { Client } from "src/client/client.entity";
-import { ItemCart } from "src/cart/itemCart.entity";
+import { Client } from "../../client/client.entity";
+import { ItemCart } from "../../cart/itemCart.entity";
 
 @Injectable()
 export class CreateOrderuseCase {
