@@ -3,7 +3,7 @@ import { ClientRepository } from "../client.repository";
 import { Client } from "../client.entity";
 
 @Injectable()
-export class GetClientByCpfUserCase {
+export class GetClientByCpfuseCase {
 
   constructor(
     private clientRepository: ClientRepository

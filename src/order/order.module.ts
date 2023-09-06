@@ -10,13 +10,13 @@ import { ClientRepository } from 'src/client/client.repository';
 import { OrderRepository } from './order.repository';
 import { ProductRepository } from 'src/product/product.repository';
 import { ClientModule } from 'src/client/client.module';
-import { CheckoutOrderUserCase } from './userCases/checkoutOrder.userCase';
-import { CreateOrderUserCase } from './userCases/createOrder.userCase';
-import { GetAllOrdersUserCase } from './userCases/getAllOrders.userCase';
-import { GetOrderByIdUserCase } from './userCases/getOrderById.userCase';
-import { GetOrdersByStatusUserCase } from './userCases/getOrdersByStatus.userCase';
-import { GetOrdersUnfinishedUserCase } from './userCases/getOrdersUnfinished.userCase';
-import { UpdateStatusOrderUserCase } from './userCases/updateStatusOrder.userCase';
+import { CheckoutOrderuseCase } from './useCases/checkoutOrder.useCase';
+import { CreateOrderuseCase } from './useCases/createOrder.useCase';
+import { GetAllOrdersuseCase } from './useCases/getAllOrders.useCase';
+import { GetOrderByIduseCase } from './useCases/getOrderById.useCase';
+import { GetOrdersByStatususeCase } from './useCases/getOrdersByStatus.useCase';
+import { GetOrdersUnfinisheduseCase } from './useCases/getOrdersUnfinished.useCase';
+import { UpdateStatusOrderuseCase } from './useCases/updateStatusOrder.useCase';
 import { ProductModule } from 'src/product/product.module';
 import { ReponseHttpHelper } from 'src/presentation/helpers/excption.http.helper';
 
@@ -31,13 +31,13 @@ import { ReponseHttpHelper } from 'src/presentation/helpers/excption.http.helper
   providers: [
     ReponseHttpHelper,
     OrderRepository,
-    CheckoutOrderUserCase,
-    CreateOrderUserCase,
-    GetAllOrdersUserCase,
-    GetOrderByIdUserCase,
-    GetOrdersByStatusUserCase,
-    GetOrdersUnfinishedUserCase,
-    UpdateStatusOrderUserCase
+    CheckoutOrderuseCase,
+    CreateOrderuseCase,
+    GetAllOrdersuseCase,
+    GetOrderByIduseCase,
+    GetOrdersByStatususeCase,
+    GetOrdersUnfinisheduseCase,
+    UpdateStatusOrderuseCase
   ]
 })
 export class OrderModule {

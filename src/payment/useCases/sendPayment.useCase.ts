@@ -1,7 +1,7 @@
 import axios from "axios";
 import { PaymentWebhookDto } from "../dto/createPayment.dto";
 
-export class SendPayamentUserCase {
+export class SendPayamentuseCase {
 
     constructor() {
     }

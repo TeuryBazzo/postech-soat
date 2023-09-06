@@ -2,12 +2,12 @@ import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { Client } from './client.entity';
 import { CreateClientDTO } from './dto/createclient.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { GetClientByCpfUserCase } from './userCases/getClientByCpf.userCase';
-import { CreateClientUserCase } from './userCases/createClient.userCase';
+import { GetClientByCpfuseCase } from './useCases/getClientByCpf.useCase';
 import { ReponseHttpHelper } from 'src/presentation/helpers/excption.http.helper';
 import { ResponseDTO } from 'src/presentation/helpers/response.dto';
 import { STATUS_CODES } from 'http';
 import { HttpStatusCode } from 'axios';
+import { CreateClientuseCase } from './useCases/createClient.useCase';
 
 
 @Controller("api/v1/clients")
@@ -15,15 +15,15 @@ import { HttpStatusCode } from 'axios';
 export class ClientController {
   constructor(
     private readonly reponseHttpHelper: ReponseHttpHelper,
-    private getClientByCpfUserCase: GetClientByCpfUserCase,
-    private createClientUserCase: CreateClientUserCase
+    private getClientByCpfuseCase: GetClientByCpfuseCase,
+    private createClientuseCase: CreateClientuseCase
   ) { }
 
   @Get()
   @ApiOperation({ summary: 'get client by cpf' })
   async getByCpf(@Query("cpf") cpf: string): Promise<ResponseDTO> {
     try {
-      let person = await this.getClientByCpfUserCase.handle(cpf);
+      let person = await this.getClientByCpfuseCase.handle(cpf);
 
       return this.reponseHttpHelper.handleReponse(HttpStatusCode.Ok, '', person)
 
@@ -36,7 +36,7 @@ export class ClientController {
   @ApiOperation({ summary: 'create client' })
   async create(@Body() client: CreateClientDTO): Promise<ResponseDTO> {
     try {
-      let person = await this.createClientUserCase.handle(client);
+      let person = await this.createClientuseCase.handle(client);
 
       return this.reponseHttpHelper.handleReponse(HttpStatusCode.Created, '', person)
 

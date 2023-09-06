@@ -3,7 +3,7 @@ import { Product } from "../product.entity";
 import { ProductRepository } from "../product.repository";
 
 @Injectable()
-export class DeleteProductUserCase {
+export class DeleteProductuseCase {
 
     constructor(
         private productRepository: ProductRepository,

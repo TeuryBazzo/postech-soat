@@ -5,10 +5,10 @@ import { Order } from "src/order/order.entity";
 import { ClientController } from "./client.controller";
 import { DataSource } from "typeorm";
 import { ClientRepository } from "./client.repository";
-import { CreateClientUserCase } from "./userCases/createClient.userCase";
-import { GetClientByCpfUserCase } from "./userCases/getClientByCpf.userCase";
+import { CreateClientuseCase } from "./useCases/createClient.useCase";
+import { GetClientByCpfuseCase } from "./useCases/getClientByCpf.useCase";
 import { ReponseHttpHelper } from "src/presentation/helpers/excption.http.helper";
-import { IsUniqueCpfUserCase } from "./userCases/isUniqueCpf.userCase";
+import { IsUniqueCpfuseCase } from "./useCases/isUniqueCpf.useCase";
 
 @Module({
     imports: [
@@ -18,12 +18,12 @@ import { IsUniqueCpfUserCase } from "./userCases/isUniqueCpf.userCase";
     providers: [
         ReponseHttpHelper,
         ClientRepository,
-        IsUniqueCpfUserCase,
-        GetClientByCpfUserCase,
-        CreateClientUserCase,
+        IsUniqueCpfuseCase,
+        GetClientByCpfuseCase,
+        CreateClientuseCase,
     ],
     exports : [
-        GetClientByCpfUserCase
+        GetClientByCpfuseCase
     ]
 })
 export class ClientModule {

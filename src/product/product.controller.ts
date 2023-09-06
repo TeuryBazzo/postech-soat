@@ -2,11 +2,11 @@ import { Body, ConflictException, Controller, Delete, Get, NotFoundException, Pa
 import { CreateProductDTO } from "./dto/createproduct.dto";
 import { UpdateProductDTO } from "./dto/updateproduct.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
-import { GetProductsByCategoryUserCase } from './userCases/getProductsByCategory.userCase';
-import { GetAllProductsUserCase } from './userCases/getAllProducts.userCase';
-import { CreateProductUserCase } from './userCases/createProduct.userCase';
-import { UpdateProductUserCase } from './userCases/updateProduct.userCase';
-import { DeleteProductUserCase } from './userCases/deleteProduct.userCase';
+import { GetProductsByCategoryuseCase } from './useCases/getProductsByCategory.useCase';
+import { GetAllProductsuseCase } from './useCases/getAllProducts.useCase';
+import { CreateProductuseCase } from './useCases/createProduct.useCase';
+import { UpdateProductuseCase } from './useCases/updateProduct.useCase';
+import { DeleteProductuseCase } from './useCases/deleteProduct.useCase';
 import { ReponseHttpHelper } from "src/presentation/helpers/excption.http.helper";
 import { ResponseDTO } from "src/presentation/helpers/response.dto";
 
@@ -15,11 +15,11 @@ import { ResponseDTO } from "src/presentation/helpers/response.dto";
 export class ProductController {
   constructor(
     private readonly reponseHttpHelper: ReponseHttpHelper,
-    private readonly getProductByCategoryUserCase: GetProductsByCategoryUserCase,
-    private readonly createProductUserCase: CreateProductUserCase,
-    private readonly updateProductUserCase: UpdateProductUserCase,
-    private readonly deleteProductUserCase: DeleteProductUserCase,
-    private readonly getAllProductsUserCase: GetAllProductsUserCase) { }
+    private readonly getProductByCategoryuseCase: GetProductsByCategoryuseCase,
+    private readonly createProductuseCase: CreateProductuseCase,
+    private readonly updateProductuseCase: UpdateProductuseCase,
+    private readonly deleteProductuseCase: DeleteProductuseCase,
+    private readonly getAllProductsuseCase: GetAllProductsuseCase) { }
 
   @Get()
   @ApiOperation({ summary: 'get products by category' })
@@ -27,8 +27,8 @@ export class ProductController {
 
     try {
       let products = category ?
-        await this.getProductByCategoryUserCase.handle(category) :
-        await this.getAllProductsUserCase.handle();
+        await this.getProductByCategoryuseCase.handle(category) :
+        await this.getAllProductsuseCase.handle();
 
       return this.reponseHttpHelper.handleReponse(200, '', products)
 
@@ -41,7 +41,7 @@ export class ProductController {
   @ApiOperation({ summary: 'create product' })
   async create(@Body() createProductDto: CreateProductDTO): Promise<ResponseDTO> {
     try {
-      let product = await this.createProductUserCase.handle(createProductDto)
+      let product = await this.createProductuseCase.handle(createProductDto)
       return this.reponseHttpHelper.handleReponse(201, 'product was created successfully', product)
     } catch (error) {
       return this.reponseHttpHelper.handleException(error);
@@ -52,7 +52,7 @@ export class ProductController {
   @ApiOperation({ summary: 'update product by id' })
   async update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDTO): Promise<ResponseDTO> {
     try {
-      let product = await this.updateProductUserCase.handle(id, updateProductDto)
+      let product = await this.updateProductuseCase.handle(id, updateProductDto)
       return this.reponseHttpHelper.handleReponse(200, 'product was updated successfully', product)
     } catch (error) {
       return this.reponseHttpHelper.handleException(error);
@@ -63,7 +63,7 @@ export class ProductController {
   @ApiOperation({ summary: 'delete product by id' })
   async delete(@Param('id') id: number): Promise<ResponseDTO> {
     try {
-      await this.deleteProductUserCase.handle(id);
+      await this.deleteProductuseCase.handle(id);
       return this.reponseHttpHelper.handleReponse(200, 'product was deleted successfully', null)
     } catch (error) {
       return this.reponseHttpHelper.handleException(error);
