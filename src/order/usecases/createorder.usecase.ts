@@ -2,10 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { OrderRepository } from "../order.repository";
 import { Order } from "../order.entity";
 import { CreateOrderDTO } from "../dto/createorder.dto";
-import { GetClientByCpfuseCase } from "src/client/useCases/getClientByCpf.useCase";
-import { GetProductsByCodeuseCase } from "src/product/useCases/getProductsByCode.useCase";
-import { Client } from "src/client/client.entity";
-import { ItemCart } from "src/cart/itemCart.entity";
+import { GetClientByCpfuseCase } from "../../client/usecases/getClientByCpf.useCase";
+import { GetProductsByCodeuseCase } from "../../product/usecases/getproductsbycode.usecase";
+import { Client } from "../../client/client.entity";
+import { ItemCart } from "../../cart/itemcart.entity";
 
 @Injectable()
 export class CreateOrderuseCase {

@@ -27,6 +27,9 @@ spec:
           initialDelaySeconds: 30
           failureThreshold: 3
           periodSeconds: 30
+        envFrom: 
+          - configMapRef:
+              name: soatapp-configmap
         env:
           - name: AWS_ACCESS_KEY_ID
             valueFrom:
@@ -37,32 +40,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: secrets
-                key: AWS_SECRET_ACCESS_KEY
-          - name: DB_HOST
-            valueFrom:
-              configMapKeyRef:
-                name: soatapp-configmap
-                key: DB_HOST
-          - name: DB_PORT
-            valueFrom:
-              configMapKeyRef:
-                name: soatapp-configmap
-                key: DB_PORT
-          - name: DB_USER
-            valueFrom:
-              configMapKeyRef:
-                name: soatapp-configmap
-                key: DB_USER
-          - name: DB_PASSWORD
-            valueFrom:
-              configMapKeyRef:
-                name: soatapp-configmap
-                key: DB_PASSWORD
-          - name: DB_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: soatapp-configmap
-                key: DB_NAME
+                key: AWS_SECRET_ACCESS_KEY          
   replicas: 3
   selector:
     matchLabels:

@@ -1,31 +1,28 @@
 import { Module } from '@nestjs/common';
 import { OrderController } from './order.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
 import { Order } from './order.entity';
-import { Product } from 'src/product/product.entity';
-import { Client } from 'src/client/client.entity';
-import { ClientController } from 'src/client/client.controller';
-import { ClientRepository } from 'src/client/client.repository';
+import { Product } from '../product/product.entity';
+import { Client } from '../client/client.entity';
 import { OrderRepository } from './order.repository';
-import { ProductRepository } from 'src/product/product.repository';
-import { ClientModule } from 'src/client/client.module';
-import { CheckoutOrderuseCase } from './useCases/checkoutOrder.useCase';
-import { CreateOrderuseCase } from './useCases/createOrder.useCase';
-import { GetAllOrdersuseCase } from './useCases/getAllOrders.useCase';
-import { GetOrderByIduseCase } from './useCases/getOrderById.useCase';
-import { GetOrdersByStatususeCase } from './useCases/getOrdersByStatus.useCase';
-import { GetOrdersUnfinisheduseCase } from './useCases/getOrdersUnfinished.useCase';
-import { UpdateStatusOrderuseCase } from './useCases/updateStatusOrder.useCase';
-import { ProductModule } from 'src/product/product.module';
-import { ReponseHttpHelper } from 'src/presentation/helpers/excption.http.helper';
+import { ClientModule } from '../client/client.module';
+import { CheckoutOrderuseCase } from './usecases/checkoutorder.usecase';
+import { CreateOrderuseCase } from './usecases/createorder.usecase';
+import { GetAllOrdersuseCase } from './usecases/getallorders.usecase';
+import { GetOrderByIduseCase } from './usecases/getorderbyid.usecase';
+import { GetOrdersByStatususeCase } from './usecases/getordersbystatus.usecase';
+import { GetOrdersUnfinisheduseCase } from './usecases/getordersunfinished.usecase';
+import { UpdateStatusOrderuseCase } from './usecases/updatestatusorder.usecase';
+import { ProductModule } from '../product/product.module';
+import { ReponseHttpHelper } from '../presentation/helpers/exception.http.helper';
+import { Cart } from '../cart/cart.entity';
 
 
 @Module({
   imports: [
     ClientModule,
     ProductModule,
-    TypeOrmModule.forFeature([Order, Client, Product])
+    TypeOrmModule.forFeature([Order, Client, Product, Cart])
   ],
   controllers: [OrderController],
   providers: [

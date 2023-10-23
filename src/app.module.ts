@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DBConfigService } from './config/db.config.service';
 import { ConfigModule } from '@nestjs/config';
 import { PaymentModule } from './payment/payment.module';
-import { ReponseHttpHelper } from './presentation/helpers/excption.http.helper';
+import { ReponseHttpHelper } from './presentation/helpers/exception.http.helper';
 
 @Module({
   imports: [
